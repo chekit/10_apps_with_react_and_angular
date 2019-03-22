@@ -4,7 +4,7 @@ My self challenge inspired by [Learn Angular 2 Development By Building 10 Apps](
 
 Inside everyy project there is a npm script __preview__ (`npm run preview`) that starts builded project in browser.
 
-### Simple website
+## Simple website
 
 - Angular - [code](01.simple_website/angular/src) | [result](01.simple_website/angular/dist)
 - React - [code](01.simple_website/react_website/src) | [result](01.simple_website/react_website/build)
