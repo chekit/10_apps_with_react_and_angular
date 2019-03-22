@@ -1,11 +1,11 @@
 
 # Created by https://www.gitignore.io/api/node,angular,visualstudio,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,angular,visualstudio,visualstudiocode
-
+#
 ### Angular ###
 ## Angular ##
 # compiled output
-/dist
+# /dist
 /tmp
 /app/**/*.js
 /app/**/*.js.map
