@@ -1,0 +1,12 @@
+.title {
+	flex: 1 1 auto;
+}
+
+.nav {
+	&__link {
+		&.is-active {
+			background-color: #f3f3f3;
+		}
+	}
+}
+

@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <span class="title">My Application</span>
+  <nav class="nav">
+    <button mat-raised-button color="accent" [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <a routerLink="/" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="is-active" class="nav__link" mat-menu-item>Home</a>
+      <a routerLink="/about" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="is-active" class="nav__link" mat-menu-item>About</a>
+    </mat-menu>
+  </nav>
+</mat-toolbar>
+

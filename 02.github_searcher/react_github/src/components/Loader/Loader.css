@@ -1,0 +1,30 @@
+@keyframes flash {
+	from {
+		opacity: 1
+	}
+
+	to {
+		opacity: 0
+	}
+}
+
+.loader {
+	text-align: center;
+}
+
+.loader .dot {
+	font-size: 21px;
+	margin: 0 2px;
+}
+
+.loader .dot:nth-child(1) {
+	animation: flash .85s .5s ease-in-out infinite ;
+}
+
+.loader .dot:nth-child(2) {
+	animation: flash .85s .90s ease-in-out infinite ;
+}
+
+.loader .dot:nth-child(3) {
+	animation: flash .85s .180s ease-in-out infinite ;
+}
