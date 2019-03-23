@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.compponent.html',
-  styles: []
+    selector: 'app-root',
+    templateUrl: './app.compponent.html',
 })
 export class AppComponent {
-  title = 'angular';
 }
