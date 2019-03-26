@@ -15,14 +15,15 @@ export class Search extends Component<SearchFieldProps> {
 		this.makeSearch = this.makeSearch.bind(this);
 	}
 
-	makeSearch({ target: { value } }: any): void {
+	makeSearch(): void {
 		const { cb } = this.props;
+		const { query } = this.refs
 
 		if (this._timer) clearTimeout(this._timer);
 
 		this._timer = setTimeout(() => {
 			if (cb) {
-				cb(value);
+				cb((query as HTMLInputElement).value);
 			}
 		}, 600);
 	}
@@ -31,11 +32,12 @@ export class Search extends Component<SearchFieldProps> {
 		return (
 			<div className="search">
 				<FormControl
-					className="search__field" 
+					className="search__field"
 					onChange={this.makeSearch}
 					placeholder="Username"
 					aria-label="Username"
 					aria-describedby="basic-addon1"
+					ref="query"
 				/>
 			</div>
 		);
