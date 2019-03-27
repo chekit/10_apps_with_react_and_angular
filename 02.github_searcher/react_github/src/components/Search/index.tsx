@@ -9,25 +9,22 @@ export interface SearchFieldProps {
 
 export class Search extends Component<SearchFieldProps> {
 	private _timer: any;
-	private _input: any;	
 
 	constructor(props: SearchFieldProps) {
 		super(props);
 		
-		this._input = React.createRef();
 		this.makeSearch = this.makeSearch.bind(this);
 	}
 	
-	// @FIXME: ref в данном случае не очень нужен, так как в makeSearch приходит объект события
-	makeSearch(): void {
+	makeSearch(e: Event): void {
 		const { cb } = this.props;
-		const { current: input } = this._input
+		const { target: { value: query } } = e;
 
 		if (this._timer) clearTimeout(this._timer);
 
 		this._timer = setTimeout(() => {
 			if (cb) {
-				cb((input as HTMLInputElement).value);
+				cb(query);
 			}
 		}, 600);
 	}
@@ -40,8 +37,7 @@ export class Search extends Component<SearchFieldProps> {
 					onChange={this.makeSearch}
 					placeholder="Username"
 					aria-label="Username"
-					aria-describedby="basic-addon1"
-					ref={this._input}
+					aria-describedby="basic-addon1" 
 				/>
 			</div>
 		);
