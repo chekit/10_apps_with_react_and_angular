@@ -18,13 +18,13 @@ export class Search extends Component<SearchFieldProps> {
 	
 	makeSearch(e: Event): void {
 		const { cb } = this.props;
-		const { target: { value: query } } = e;
+		const target: HTMLInputElement = e.target as HTMLInputElement;
 
 		if (this._timer) clearTimeout(this._timer);
 
 		this._timer = setTimeout(() => {
 			if (cb) {
-				cb(query);
+				cb(target.value);
 			}
 		}, 600);
 	}
