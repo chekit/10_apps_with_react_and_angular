@@ -17,7 +17,8 @@ export class Search extends Component<SearchFieldProps> {
 		this._input = React.createRef();
 		this.makeSearch = this.makeSearch.bind(this);
 	}
-
+	
+	// @FIXME: ref в данном случае не очень нужен, так как в makeSearch приходит объект события
 	makeSearch(): void {
 		const { cb } = this.props;
 		const { current: input } = this._input
