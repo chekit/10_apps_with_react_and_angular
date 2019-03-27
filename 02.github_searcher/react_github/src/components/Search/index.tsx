@@ -9,21 +9,24 @@ export interface SearchFieldProps {
 
 export class Search extends Component<SearchFieldProps> {
 	private _timer: any;
+	private _input: any;	
+
 	constructor(props: SearchFieldProps) {
 		super(props);
-
+		
+		this._input = React.createRef();
 		this.makeSearch = this.makeSearch.bind(this);
 	}
 
 	makeSearch(): void {
 		const { cb } = this.props;
-		const { query } = this.refs
+		const { current: input } = this._input
 
 		if (this._timer) clearTimeout(this._timer);
 
 		this._timer = setTimeout(() => {
 			if (cb) {
-				cb((query as HTMLInputElement).value);
+				cb((input as HTMLInputElement).value);
 			}
 		}, 600);
 	}
@@ -37,7 +40,7 @@ export class Search extends Component<SearchFieldProps> {
 					placeholder="Username"
 					aria-label="Username"
 					aria-describedby="basic-addon1"
-					ref="query"
+					ref={this._input}
 				/>
 			</div>
 		);
