@@ -5,7 +5,8 @@ import { HomePageComponent } from './home/home.component';
 
 export enum Paths {
 	ROOT = '',
-	ABOUT = 'about'
+	ABOUT = 'about',
+	LOGIN = 'login'
 }
 
 export const appRoutes: Routes = [

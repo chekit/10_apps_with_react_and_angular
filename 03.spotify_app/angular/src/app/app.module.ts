@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { SpotifyService } from './services/spotify.service';
+import { TokenInterceptor } from './services/token.interceptor';
 
 
 @NgModule({
@@ -19,7 +20,11 @@ import { SpotifyService } from './services/spotify.service';
     HttpClientModule
   ],
   providers: [
-    SpotifyService
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,17 @@
+:host {
+	.error {
+		padding: 20px;
+		text-align: center;
+
+		p {
+			color: #f00;
+			font-weight: bold;
+		}
+	}
+
+	.loader {
+		display: flex;
+		padding: 10px;
+		justify-content: center;
+	}
+}

@@ -4,4 +4,24 @@
 		<p>Just search it using the form below</p>
 	</header>
 	<ps-search (queryChange)="onQueryChange($event)"></ps-search>
+	<ng-container *ngIf="!isError(); else error">
+		<div class="content" *ngIf="!isLoading(); else loader">
+			<!-- @TODO -->
+			{{ !state.data && 'Enter artist name' }}
+		</div>
+
+		<ng-template #loader>
+			<div class="loader">
+				<sp-loader>
+					Loading...
+				</sp-loader>
+			</div>
+		</ng-template>
+	</ng-container>
 </section>
+
+<ng-template #error>
+	<div class="error">
+		<p>{{ this.state.data }}</p>
+	</div>
+</ng-template>
