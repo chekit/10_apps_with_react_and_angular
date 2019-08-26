@@ -1,10 +1,10 @@
-import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SpotifyService } from 'src/app/services/spotify.service';
 
+import { Albums, Item } from '../../models/albums.response';
+import { SpotifyService } from '../../services/spotify.service';
 import { APP_TITLE } from '../app-title';
 
 export enum HomePageStateTypes {
@@ -15,8 +15,10 @@ export enum HomePageStateTypes {
 
 interface HomePageState {
 	type: HomePageStateTypes;
-	data?: any;
+	data?: HomePageData;
 }
+
+export type HomePageData = string | Albums;
 
 @Component({
 	selector: 'ps-home-page',
@@ -32,7 +34,6 @@ export class HomePageComponent implements OnInit {
 		private title: Title,
 		private spotifyService: SpotifyService,
 		private route: ActivatedRoute,
-		private location: Location,
 		private router: Router
 	) { }
 
@@ -45,9 +46,9 @@ export class HomePageComponent implements OnInit {
 
 		this.setState(HomePageStateTypes.LOADING);
 
-		this.spotifyService.searchMusic(query)
+		this.spotifyService.searchAlbums(query)
 			.subscribe(
-				(data: any) => this.setState(HomePageStateTypes.DEFAULT, data),
+				(data: Albums) => this.setState(HomePageStateTypes.DEFAULT, data),
 				(err: HttpErrorResponse) => this.setState(HomePageStateTypes.ERROR, 'Something goes wrong!')
 			)
 	}
@@ -58,6 +59,14 @@ export class HomePageComponent implements OnInit {
 
 	isLoading(): boolean {
 		return this.state.type === HomePageStateTypes.LOADING;
+	}
+
+	getAlbums(): Item[] {
+		return (this.state.data && (this.state.data as Albums).items) || [];
+	}
+
+	trackById(index: number, item: Item): string {
+		return item.id;
 	}
 
 	private setState(type: HomePageStateTypes, data?: any): void {

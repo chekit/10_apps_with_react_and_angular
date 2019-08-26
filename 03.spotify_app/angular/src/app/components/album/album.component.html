@@ -1,0 +1,19 @@
+<div class="album">
+	<div class="cover" (click)="onAlbumClick(model.href)">
+		<ng-container *ngIf="albumCover; else nocover">
+			<img [src]="albumCover.url" [width]="albumCover.width" [height]="albumCover.height" alt="" class="cover__image" />
+		</ng-container>
+	</div>
+	<div class="info">
+		<p class="title" (click)="onAlbumClick(model.href)">{{ model.name }} </p>
+		<ul class="artists">
+			<li *ngFor="let artist of model.artists" class="artists__item" (click)="onArtistClick(artist.href)">
+				{{ artist.name }}
+			</li>
+		</ul>
+	</div>
+</div>
+
+<ng-template #nocover>
+	<p>no cover</p>
+</ng-template>

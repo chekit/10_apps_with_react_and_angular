@@ -14,4 +14,15 @@
 		padding: 10px;
 		justify-content: center;
 	}
+
+	.albums {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-wrap: wrap;
+
+		&__item {
+			margin: 0 20px 20px 0;
+		}
+	}
 }

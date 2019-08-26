@@ -25,27 +25,23 @@ export class TokenInterceptor implements HttpInterceptor {
 
 		return next.handle(request)
 			.pipe(
-				catchError(
-					(err: any) => {
-						if (err instanceof HttpErrorResponse) {
-							if (err.status === 401) {
-								return this.authService.fetchToken()
-									.pipe(
-										map((token: string) => {
-											request = req.clone({
-												setHeaders: {
-													'Authorization': token
-												}
-											});
+				catchError((err: any) => {
+					if (err instanceof HttpErrorResponse && err.status === 401) {
+						return this.authService.fetchToken()
+							.pipe(
+								map((token: string) => {
+									request = req.clone({
+										setHeaders: {
+											'Authorization': token
+										}
+									});
 
-											return request;
-										}),
-										switchMap((r: HttpRequest<any>) => next.handle(r)),
-									)
-							}
-						}
+									return request;
+								}),
+								switchMap((r: HttpRequest<any>) => next.handle(r)),
+							)
 					}
-				)
+				})
 			);
 	}
 }

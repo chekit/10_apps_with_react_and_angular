@@ -6,8 +6,11 @@
 	<ps-search (queryChange)="onQueryChange($event)"></ps-search>
 	<ng-container *ngIf="!isError(); else error">
 		<div class="content" *ngIf="!isLoading(); else loader">
-			<!-- @TODO -->
-			{{ !state.data && 'Enter artist name' }}
+			<div class="albums">
+				<ng-container *ngFor="let item of getAlbums(); trackBy: trackById">
+					<sp-album class="albums__item" [model]="item"></sp-album>
+				</ng-container>
+			</div>
 		</div>
 
 		<ng-template #loader>

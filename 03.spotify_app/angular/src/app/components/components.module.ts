@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
 import { appRoutes } from '../pages/routing';
+import { AlbumComponent } from './album/album.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -16,11 +18,13 @@ const COMPONENTS = [
 	NavigationComponent,
 	NavbarComponent,
 	SearchComponent,
-	LoaderComponent
+	LoaderComponent,
+	AlbumComponent
 ]
 
 @NgModule({
 	imports: [
+		CommonModule,
 		MatToolbarModule,
 		MatButtonModule,
 		MatInputModule,
