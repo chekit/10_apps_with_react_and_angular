@@ -46,7 +46,7 @@ export class HomePageComponent implements OnInit {
 
 		this.setState(HomePageStateTypes.LOADING);
 
-		this.spotifyService.searchAlbums(query)
+		this.spotifyService.searchArtist(query)
 			.subscribe(
 				(data: Albums) => this.setState(HomePageStateTypes.DEFAULT, data),
 				(err: HttpErrorResponse) => this.setState(HomePageStateTypes.ERROR, 'Something goes wrong!')
