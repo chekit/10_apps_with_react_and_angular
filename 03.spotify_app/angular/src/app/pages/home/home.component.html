@@ -6,9 +6,9 @@
 	<ps-search (queryChange)="onQueryChange($event)"></ps-search>
 	<ng-container *ngIf="!isError(); else error">
 		<div class="content" *ngIf="!isLoading(); else loader">
-			<div class="albums">
-				<ng-container *ngFor="let item of getAlbums(); trackBy: trackById">
-					<sp-album class="albums__item" [model]="item"></sp-album>
+			<div class="artists">
+				<ng-container *ngFor="let item of state?.data?.items; trackBy: trackById">
+					<sp-artist class="artists__item" [model]="item"></sp-artist>
 				</ng-container>
 			</div>
 		</div>
@@ -25,6 +25,12 @@
 
 <ng-template #error>
 	<div class="error">
-		<p>{{ this.state.data }}</p>
+		<p>{{ state.data }}</p>
+	</div>
+</ng-template>
+
+<ng-template #empty>
+	<div class="empty">
+		<p>Not found</p>
 	</div>
 </ng-template>

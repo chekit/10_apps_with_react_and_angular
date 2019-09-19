@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Albums, AlbumsResponse } from '../models/albums.response';
-import { Artists } from '../models/artist.response';
+import { Albums, AlbumsResponse } from '../models/albums.model';
+import { Artists, ArtistsResponse } from '../models/artist.model';
 
 export enum SearchTypes {
 	ARTIST = 'artist',
@@ -54,7 +54,7 @@ export class SpotifyService {
 				}
 			)
 				.pipe(
-					map(({ albums }: AlbumsResponse) => albums)
+					map(({ artists }: ArtistsResponse) => artists)
 				)
 			: of(null);
 	}

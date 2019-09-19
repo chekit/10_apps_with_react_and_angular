@@ -1,16 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ArtistItem } from 'src/app/models/artist.model';
 
-import { Image, Item } from '../../models/albums.response';
+import { Image } from '../../models/base.model';
 
 const COVER_SIZE: number = 300;
 
 @Component({
-	selector: 'sp-album',
-	templateUrl: './album.component.html',
-	styleUrls: ['./album.component.scss']
+	selector: 'sp-artist',
+	templateUrl: './artist.component.html',
+	styleUrls: ['./artist.component.scss']
 })
-export class AlbumComponent {
-	@Input() model: Item;
+export class ArtistComponent {
+	@Input() model: ArtistItem;
 
 	@Output() showAlbum: EventEmitter<string> = new EventEmitter();
 	@Output() shoowArtist: EventEmitter<string> = new EventEmitter();

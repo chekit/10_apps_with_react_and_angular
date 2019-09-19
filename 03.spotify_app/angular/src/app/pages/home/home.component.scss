@@ -1,5 +1,25 @@
 :host {
+	header {
+		h1 {
+			font-size: 3.4rem;
+		}
+
+		p {
+			font-size: 1.6rem;
+		}
+	}
+
 	.error {
+		padding: 20px;
+		text-align: center;
+
+		p {
+			color: #f00;
+			font-weight: bold;
+		}
+	}
+
+	.empty {
 		padding: 20px;
 		text-align: center;
 
@@ -15,13 +35,15 @@
 		justify-content: center;
 	}
 
-	.albums {
+	.artists {
 		display: flex;
 		justify-content: flex-start;
 		align-items: flex-start;
 		flex-wrap: wrap;
+		padding: 25px 0;
 
 		&__item {
+			width: 300px;
 			margin: 0 20px 20px 0;
 		}
 	}

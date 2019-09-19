@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Albums, Item } from '../../models/albums.response';
+import { Albums, AlbumItem } from '../../models/albums.model';
 import { SpotifyService } from '../../services/spotify.service';
 import { APP_TITLE } from '../app-title';
+import { Artists, ArtistItem } from 'src/app/models/artist.model';
 
 export enum HomePageStateTypes {
 	ERROR,
@@ -18,7 +19,7 @@ interface HomePageState {
 	data?: HomePageData;
 }
 
-export type HomePageData = string | Albums;
+export type HomePageData = string | Artists;
 
 @Component({
 	selector: 'ps-home-page',
@@ -27,7 +28,8 @@ export type HomePageData = string | Albums;
 })
 export class HomePageComponent implements OnInit {
 	state: HomePageState = {
-		type: HomePageStateTypes.DEFAULT
+		type: HomePageStateTypes.DEFAULT,
+		data: null
 	}
 
 	constructor(
@@ -48,8 +50,8 @@ export class HomePageComponent implements OnInit {
 
 		this.spotifyService.searchArtist(query)
 			.subscribe(
-				(data: Albums) => this.setState(HomePageStateTypes.DEFAULT, data),
-				(err: HttpErrorResponse) => this.setState(HomePageStateTypes.ERROR, 'Something goes wrong!')
+				(data: Artists) => this.setState(HomePageStateTypes.DEFAULT, data),
+				() => this.setState(HomePageStateTypes.ERROR, 'Something goes wrong!')
 			)
 	}
 
@@ -61,11 +63,7 @@ export class HomePageComponent implements OnInit {
 		return this.state.type === HomePageStateTypes.LOADING;
 	}
 
-	getAlbums(): Item[] {
-		return (this.state.data && (this.state.data as Albums).items) || [];
-	}
-
-	trackById(index: number, item: Item): string {
+	trackById(index: number, item: AlbumItem): string {
 		return item.id;
 	}
 
