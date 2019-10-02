@@ -26,6 +26,7 @@
 		p {
 			color: #f00;
 			font-weight: bold;
+			font-size: 1.8rem;
 		}
 	}
 
@@ -45,6 +46,13 @@
 		&__item {
 			width: 300px;
 			margin: 0 20px 20px 0;
+			cursor: pointer;
+			opacity: .9;
+			transition: opacity .15s ease-in-out;
+
+			&:hover {
+				opacity: 1;
+			}
 		}
 	}
 }

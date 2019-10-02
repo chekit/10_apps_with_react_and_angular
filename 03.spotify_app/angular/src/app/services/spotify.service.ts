@@ -13,6 +13,13 @@ export enum SearchTypes {
 	TRACK = 'track'
 }
 
+export interface searchConfig {
+	q?: string;
+	type?: SearchTypes;
+	offset?: string;
+	limit?: string;
+}
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -21,16 +28,16 @@ export class SpotifyService {
 		private http: HttpClient
 	) { }
 
-	searchAlbums(query: string, type: SearchTypes = SearchTypes.ALBUM): Observable<Albums> {
-		return query
+	searchAlbums(config: searchConfig): Observable<Albums> {
+		return config.q
 			? this.http.get(
 				'https://api.spotify.com/v1/search',
 				{
 					params: {
-						q: query,
-						type,
-						// offset: '20' - на сколько трэков сместить
-						// limit - сколько максимум загружать
+						type: SearchTypes.ALBUM,
+						limit: '20',
+						offset: '0',
+						...config
 					}
 				}
 			)
@@ -40,16 +47,16 @@ export class SpotifyService {
 			: of(null);
 	}
 
-	searchArtist(query: string, type: SearchTypes = SearchTypes.ARTIST): Observable<Artists> {
-		return query
+	searchArtist(config: searchConfig): Observable<Artists> {
+		return config.q
 			? this.http.get(
 				'https://api.spotify.com/v1/search',
 				{
 					params: {
-						q: query,
-						type,
-						// offset: '20' - на сколько трэков сместить
-						// limit - сколько максимум загружать
+						type: SearchTypes.ARTIST,
+						limit: '20',
+						offset: '0',
+						...config
 					}
 				}
 			)

@@ -1,25 +1,24 @@
 <section>
 	<header>
 		<h1>Need Music?</h1>
-		<p>Just search artist it using the form below</p>
+		<p>Just search artist by using the input below</p>
 	</header>
-	<ps-search (queryChange)="onQueryChange($event)"></ps-search>
+	<ps-search (queryChange)="onQueryChange($event)" [query]="initQuery"></ps-search>
 	<ng-container *ngIf="!isError(); else error">
-		<div class="content" *ngIf="!isLoading(); else loader">
-			<div class="artists">
-				<ng-container *ngFor="let item of state?.data?.items; trackBy: trackById">
-					<sp-artist class="artists__item" [model]="item"></sp-artist>
+		<div class="content">
+			<div class="artists" *ngIf="!isLoading()">
+				<ng-container *ngIf="state?.data?.length; else empty">
+					<ng-container *ngFor="let item of state?.data; trackBy: trackById">
+						<sp-artist class="artists__item" [model]="item" (click)="showArtistInfo(item)"></sp-artist>
+					</ng-container>
 				</ng-container>
 			</div>
-		</div>
-
-		<ng-template #loader>
-			<div class="loader">
+			<div class="loader" *ngIf="isLoading()">
 				<sp-loader>
 					Loading...
 				</sp-loader>
 			</div>
-		</ng-template>
+		</div>
 	</ng-container>
 </section>
 
@@ -30,7 +29,7 @@
 </ng-template>
 
 <ng-template #empty>
-	<div class="empty">
+	<div class="empty" *ngIf="state.data">
 		<p>Not found</p>
 	</div>
 </ng-template>

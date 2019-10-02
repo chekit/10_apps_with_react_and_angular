@@ -1,6 +1,5 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
 import { debounceTime, distinctUntilChanged, pluck } from 'rxjs/operators';
 
 @Component({
@@ -9,23 +8,24 @@ import { debounceTime, distinctUntilChanged, pluck } from 'rxjs/operators';
 	styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+	@Input() query: string = '';
 	@Output() queryChange: EventEmitter<string> = new EventEmitter();
-	
+
 	search: FormGroup;
 
 	constructor(
 		private fb: FormBuilder
-	) {
-		this.search = this.fb.group({
-			search: this.fb.control('')
-		});
-	}
+	) {}
 
 	ngOnInit(): void {
+		this.search = this.fb.group({
+			input: this.fb.control(this.query)
+		});
+
 		this.search.valueChanges
 			.pipe(
 				debounceTime(300),
-				pluck('search'),
+				pluck('input'),
 				distinctUntilChanged()
 			)
 			.subscribe(value => this.queryChange.emit(value));

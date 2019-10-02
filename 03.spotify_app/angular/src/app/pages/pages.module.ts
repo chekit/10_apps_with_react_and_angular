@@ -4,6 +4,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { ComponenetsModule } from '../components/components.module';
 import { AboutPageComponent } from './about/about.component';
+import { ArtistPageComponent } from './artist/artist.component';
 import { HomePageComponent } from './home/home.component';
 import { PagesWrapperComponent } from './wrapper/pages-wrapper.component';
 
@@ -17,7 +18,8 @@ import { PagesWrapperComponent } from './wrapper/pages-wrapper.component';
 	declarations: [
 		PagesWrapperComponent,
 		AboutPageComponent,
-		HomePageComponent
+		HomePageComponent,
+		ArtistPageComponent
 	],
 	exports: [
 		PagesWrapperComponent
