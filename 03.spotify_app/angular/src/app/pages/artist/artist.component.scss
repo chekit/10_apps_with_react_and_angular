@@ -1,0 +1,55 @@
+:host {
+    .loader {
+        display: flex;
+        padding: 10px;
+        justify-content: center;
+    }
+
+
+    .nodata {
+        padding: 20px;
+        text-align: center;
+
+        p {
+            color: #f00;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+    }
+
+    .empty {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        height: 300px;
+        background-color: #444;
+
+        mat-icon {
+            width: 100px;
+            height: 100px;
+            opacity: .16;
+            font-size: 100px;
+        }
+    }
+
+    .albums {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        padding: 25px 0;
+
+        &__item {
+            width: 300px;
+            margin: 0 20px 20px 0;
+            cursor: pointer;
+            opacity: .9;
+            transition: opacity .15s ease-in-out;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}

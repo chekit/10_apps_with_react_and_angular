@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Albums, AlbumsResponse } from '../models/albums.model';
-import { Artists, ArtistsResponse } from '../models/artist.model';
+import { ArtistItem, Artists, ArtistsResponse } from '../models/artist.model';
 
 export enum SearchTypes {
 	ARTIST = 'artist',
@@ -15,10 +15,13 @@ export enum SearchTypes {
 
 export interface searchConfig {
 	q?: string;
-	type?: SearchTypes;
 	offset?: string;
 	limit?: string;
 }
+
+export const ITEMS_LIMIT: number = 20;
+
+const API_URL: string = 'https://api.spotify.com/v1/';
 
 @Injectable({
 	providedIn: 'root'
@@ -31,11 +34,11 @@ export class SpotifyService {
 	searchAlbums(config: searchConfig): Observable<Albums> {
 		return config.q
 			? this.http.get(
-				'https://api.spotify.com/v1/search',
+				`${API_URL}search`,
 				{
 					params: {
 						type: SearchTypes.ALBUM,
-						limit: '20',
+						limit: `${ITEMS_LIMIT}`,
 						offset: '0',
 						...config
 					}
@@ -47,14 +50,14 @@ export class SpotifyService {
 			: of(null);
 	}
 
-	searchArtist(config: searchConfig): Observable<Artists> {
+	searchArtists(config: searchConfig): Observable<Artists> {
 		return config.q
 			? this.http.get(
-				'https://api.spotify.com/v1/search',
+				`${API_URL}search`,
 				{
 					params: {
 						type: SearchTypes.ARTIST,
-						limit: '20',
+						limit: `${ITEMS_LIMIT}`,
 						offset: '0',
 						...config
 					}
@@ -64,5 +67,19 @@ export class SpotifyService {
 					map(({ artists }: ArtistsResponse) => artists)
 				)
 			: of(null);
+	}
+
+	getArtistById(id: string): Observable<ArtistItem> {
+		return this.http.get(`${API_URL}artists/${id}`)
+			.pipe(
+				map((response: ArtistItem) => response)
+			);
+	}
+
+	getAlbumsByArtistId(id: string): Observable<Albums> {
+		return this.http.get(`${API_URL}artists/${id}/albums`)
+			.pipe(
+				map((response: Albums) => response)
+			);
 	}
 }

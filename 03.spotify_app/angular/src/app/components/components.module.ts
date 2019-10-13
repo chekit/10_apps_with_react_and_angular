@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
 import { appRoutes } from '../pages/routing';
+import { AlbumComponent } from './album/album.component';
 import { ArtistComponent } from './artist/artist.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -20,7 +21,8 @@ const COMPONENTS = [
 	NavbarComponent,
 	SearchComponent,
 	LoaderComponent,
-	ArtistComponent
+	ArtistComponent,
+	AlbumComponent
 ]
 
 @NgModule({

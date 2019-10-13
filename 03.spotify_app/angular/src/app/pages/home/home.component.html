@@ -3,10 +3,10 @@
 		<h1>Need Music?</h1>
 		<p>Just search artist by using the input below</p>
 	</header>
-	<ps-search (queryChange)="onQueryChange($event)" [query]="initQuery"></ps-search>
+	<ps-search (queryChange)="onQueryChange($event)" [query]="currentQuery"></ps-search>
 	<ng-container *ngIf="!isError(); else error">
 		<div class="content">
-			<div class="artists" *ngIf="!isLoading()">
+			<div class="artists">
 				<ng-container *ngIf="state?.data?.length; else empty">
 					<ng-container *ngFor="let item of state?.data; trackBy: trackById">
 						<sp-artist class="artists__item" [model]="item" (click)="showArtistInfo(item)"></sp-artist>

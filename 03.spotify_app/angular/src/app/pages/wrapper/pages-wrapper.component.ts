@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { APP_TITLE } from '../app-title';
+import { APP_TITLE } from '../../shared/app-title';
 
 @Component({
 	selector: 'ps-pages-wrapper',

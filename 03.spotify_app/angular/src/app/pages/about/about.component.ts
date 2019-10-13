@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { RouteTitleService } from 'src/app/services/title.service';
 
-import { APP_TITLE } from '../app-title';
+const PAGE_NAME = 'About';
 
 @Component({
 	selector: 'ps-about-page',
@@ -10,10 +10,11 @@ import { APP_TITLE } from '../app-title';
 })
 export class AboutPageComponent implements OnInit {
 	constructor(
-		private title: Title
-	) {}
+		private routeTitle: RouteTitleService
+	) { }
 
 	ngOnInit(): void {
-		this.title.setTitle(`${APP_TITLE} - About`);
+		this.routeTitle.setTitle(PAGE_NAME);
+
 	}
 }

@@ -1,21 +1,22 @@
-<div class="album">
-	<div class="cover" (click)="onAlbumClick(model.href)">
-		<ng-container *ngIf="albumCover; else nocover">
-			<img [src]="albumCover.url" [width]="albumCover.width" [height]="albumCover.height" alt="" class="cover__image" />
+<div class="artist">
+	<div class="cover">
+		<ng-container *ngIf="artistPhoto; else nophoto">
+			<img [src]="artistPhoto.url" [width]="artistPhoto.width" [height]="artistPhoto.height" alt=""
+				class="cover__image" />
 		</ng-container>
 	</div>
 	<div class="info">
-		<p class="title" (click)="onAlbumClick(model.href)">{{ model.name }} </p>
+		<p class="title">{{ model.name }} </p>
 		<ul class="artists">
-			<li *ngFor="let artist of model.artists" class="artists__item" (click)="onArtistClick(artist.href)">
+			<li *ngFor="let artist of model.artists" class="artists__item">
 				{{ artist.name }}
 			</li>
 		</ul>
 	</div>
 </div>
 
-<ng-template #nocover>
+<ng-template #nophoto>
 	<div class="empty">
-		<mat-icon>account_circle</mat-icon>
+		<mat-icon>face</mat-icon>
 	</div>
 </ng-template>
