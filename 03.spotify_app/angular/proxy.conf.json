@@ -1,0 +1,10 @@
+{
+	"/api/token": {
+		"target": "https://accounts.spotify.com/api/token",
+		"changeOrigin": true,
+		"secure": false,
+		"pathRewrite": {
+			"^/api/token": ""
+		}
+	}
+}

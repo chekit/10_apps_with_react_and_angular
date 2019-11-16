@@ -1,0 +1,14 @@
+<div class="album">
+	<ng-container *ngIf="albumImage; else nocover">
+		<div class="album__cover">
+			<img [src]="albumImage" [alt]="model.name" />
+		</div>
+	</ng-container>
+	<p class="album__name">{{ model.name }}</p>
+</div>
+
+<ng-template #nocover>
+	<div class="empty">
+		<mat-icon>image</mat-icon>
+	</div>
+</ng-template>
