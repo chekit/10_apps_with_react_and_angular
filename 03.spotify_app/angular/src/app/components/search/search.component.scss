@@ -1,0 +1,11 @@
+:host {
+	font-size: 1.4rem;
+
+	.search {
+		width: 400px;
+
+		&__fieldset	{
+			width: 100%;
+		}
+	}
+}
