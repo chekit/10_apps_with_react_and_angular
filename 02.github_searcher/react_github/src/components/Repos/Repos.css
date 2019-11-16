@@ -1,0 +1,32 @@
+.repos {
+	margin-bottom: 20px;
+}
+
+.repos__heading {
+	font-size: 24px;
+	font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.repos-list {
+	font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.repos-list__item {
+	display: flex;
+	justify-content: space-between;
+}
+
+.repos-list__title {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+
+.repos-list__subtitle {
+    font-size: 11px;
+	color: #747474;
+	margin-bottom: 5px;
+}
+
+.badge {
+	font-size: 12px;
+}
