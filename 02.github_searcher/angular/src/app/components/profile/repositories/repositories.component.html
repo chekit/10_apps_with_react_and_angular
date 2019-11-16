@@ -1,0 +1,17 @@
+<mat-card>
+	<mat-card-content>
+		<mat-card-subtitle>User Repositories</mat-card-subtitle>
+		<ul class="repos">
+			<li class="repo" *ngFor="let repo of model; trackBy: trackByFn">
+				<div class="repo__container">
+					<p class="repo__title">{{repo.name}}</p>
+					<p class="repo__description">{{repo.description}}</p>
+				</div>
+				<div class="repo__container repo__container--inline">
+					<mat-chip class="watchers" color="accent" selected>Watchers: {{ repo.watchers }}</mat-chip>
+					<mat-chip class="forks" color="warn" selected>Forks: {{ repo.forks }}</mat-chip>
+				</div>
+			</li>
+		</ul>
+	</mat-card-content>
+</mat-card>
