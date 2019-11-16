@@ -1,16 +1,12 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AboutComponent } from './components/pages/about/about.component';
-import { HomeComponent } from './components/pages/home/home.component';
-
-
-
+import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
 	{
 		path: '',
-		
 		component: HomeComponent
 	},
 	{
@@ -23,4 +19,4 @@ const appRoutes: Routes = [
 	}
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const Routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

@@ -14,11 +14,15 @@ class App extends Component {
       <Router>
         <div className="app">
           <Header />
-          <Jumbotron />
-          <div className="container">
-            <Route exact path="/" component={Home as any} />
-            <Route path="/about/" component={About as any} />
-          </div>
+          <main>
+            <section>
+              <Jumbotron />
+            </section>
+            <section className="container">
+              <Route exact path="/" component={Home as any} />
+              <Route path="/about/" component={About as any} />
+            </section>
+          </main>
         </div>
       </Router>
     );

@@ -9,9 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "hmr": "ng serve --configuration hmr",
-    "preview": "browser-sync start --server ./dist/angular",
-    "gh-pages": "ng build --prod --output-path docs --base-href 10_apps_with_react_and_angular"
+    "hmr": "ng serve --configuration hmr"
   },
   "private": true,
   "dependencies": {
