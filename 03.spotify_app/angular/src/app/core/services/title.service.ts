@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { APP_TITLE } from 'src/app/shared';
 
-import { APP_TITLE } from '../shared/app-title';
-
-
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class RouteTitleService {
 	constructor(
 		private title: Title,

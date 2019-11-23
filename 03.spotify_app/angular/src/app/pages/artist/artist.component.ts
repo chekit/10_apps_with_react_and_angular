@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
-import { SpotifyService } from 'src/app/services/spotify.service';
 import { forkJoin } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { SpotifyService } from 'src/app/core';
 import { ArtistPageModel } from 'src/app/models/artist-page.model';
 
 @Component({

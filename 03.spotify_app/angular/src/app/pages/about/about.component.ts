@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteTitleService } from 'src/app/services/title.service';
+import { RouteTitleService } from 'src/app/core';
 
 const PAGE_NAME = 'About';
 
@@ -15,6 +15,5 @@ export class AboutPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.routeTitle.setTitle(PAGE_NAME);
-
 	}
 }

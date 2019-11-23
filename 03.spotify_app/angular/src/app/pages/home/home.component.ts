@@ -3,12 +3,11 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subject } from 'rxjs';
 import { filter, first, map, takeUntil } from 'rxjs/operators';
-import { ArtistComponent } from 'src/app/components/artist/artist.component';
 import { ArtistItem, Artists } from 'src/app/models/artist.model';
 
 import { AlbumItem } from '../../models/albums.model';
-import { SpotifyService, ITEMS_LIMIT } from '../../services/spotify.service';
-import { RouteTitleService } from 'src/app/services/title.service';
+import { ArtistComponent } from 'src/app/shared/components/artist/artist.component';
+import { RouteTitleService, SpotifyService } from 'src/app/core';
 
 export enum HomePageStateTypes {
 	ERROR,

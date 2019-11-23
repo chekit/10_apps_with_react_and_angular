@@ -1,12 +1,10 @@
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
+import { CoreModule } from './core/core.module';
 import { PagesModule } from './pages/pages.module';
-import { SpotifyService } from './services/spotify.service';
-import { TokenInterceptor } from './services/token.interceptor';
 
 
 @NgModule({
@@ -17,14 +15,7 @@ import { TokenInterceptor } from './services/token.interceptor';
     BrowserModule,
     BrowserAnimationsModule,
     PagesModule,
-    HttpClientModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    CoreModule
   ],
   bootstrap: [AppComponent]
 })

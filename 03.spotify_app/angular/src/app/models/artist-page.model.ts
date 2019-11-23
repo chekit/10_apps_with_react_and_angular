@@ -1,5 +1,5 @@
-import { AlbumItem, Albums } from './albums.model';
-import { ArtistItem, FACE_SIZE, COVER_SIZE } from './artist.model';
+import { Albums } from './albums.model';
+import { ArtistItem, FACE_SIZE } from './artist.model';
 import { Image } from './base.model';
 
 export class ArtistPageModel {

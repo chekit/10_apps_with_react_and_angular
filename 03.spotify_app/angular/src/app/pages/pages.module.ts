@@ -1,21 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
 
-import { ComponenetsModule } from '../components/components.module';
+import { SharedModule } from '../shared/shared.module';
 import { AboutPageComponent } from './about/about.component';
 import { ArtistPageComponent } from './artist/artist.component';
 import { HomePageComponent } from './home/home.component';
+import { appRoutes } from './routing';
 import { PagesWrapperComponent } from './wrapper/pages-wrapper.component';
 
 
 @NgModule({
 	imports: [
-		MatSidenavModule,
-		ComponenetsModule,
+		SharedModule,
 		CommonModule,
-		MatIconModule
+		RouterModule.forRoot(appRoutes),
 	],
 	declarations: [
 		PagesWrapperComponent,

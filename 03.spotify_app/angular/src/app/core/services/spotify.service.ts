@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { Albums, AlbumsResponse } from '../models/albums.model';
-import { ArtistItem, Artists, ArtistsResponse } from '../models/artist.model';
+import { Albums, AlbumsResponse } from 'src/app/models/albums.model';
+import { ArtistItem, Artists, ArtistsResponse } from 'src/app/models/artist.model';
 
 export enum SearchTypes {
 	ARTIST = 'artist',
@@ -23,9 +22,7 @@ export const ITEMS_LIMIT: number = 20;
 
 const API_URL: string = 'https://api.spotify.com/v1/';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class SpotifyService {
 	constructor(
 		private http: HttpClient

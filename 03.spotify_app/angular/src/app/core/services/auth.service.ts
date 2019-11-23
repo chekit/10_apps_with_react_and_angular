@@ -13,9 +13,7 @@ export interface TokenData {
 const CLIENT_ID: string = 'f20de8659aa84942920613dfa212cd3c';
 const CLIENT_SECRET: string = '8f3f55a13be64c72889a85b20c73b618';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 	private payload: HttpParams;
 	private currentToken: string;
