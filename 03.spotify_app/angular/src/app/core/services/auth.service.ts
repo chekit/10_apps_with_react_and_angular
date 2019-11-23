@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+
+import { CLNT_ID, CLNT_SCRT } from '../constants';
 
 export interface TokenData {
 	access_token: string;
@@ -9,9 +11,6 @@ export interface TokenData {
 	expires_in: number;
 	scope: string;
 }
-
-const CLIENT_ID: string = 'f20de8659aa84942920613dfa212cd3c';
-const CLIENT_SECRET: string = '8f3f55a13be64c72889a85b20c73b618';
 
 @Injectable()
 export class AuthService {
@@ -23,8 +22,8 @@ export class AuthService {
 	) {
 		this.payload = new HttpParams()
 			.set('grant_type', 'client_credentials')
-			.set('client_id', CLIENT_ID)
-			.set('client_secret', CLIENT_SECRET);
+			.set('client_id', atob(CLNT_ID))
+			.set('client_secret', atob(CLNT_SCRT));
 	}
 
 	get token(): string {

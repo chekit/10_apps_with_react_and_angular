@@ -1,0 +1,2 @@
+export const CLNT_ID: string = 'ZjIwZGU4NjU5YWE4NDk0MjkyMDYxM2RmYTIxMmNkM2M=';
+export const CLNT_SCRT: string = 'OGYzZjU1YTEzYmU2NGM3Mjg4OWE4NWIyMGM3M2I2MTg=';
