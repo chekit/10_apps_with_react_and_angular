@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { APP_TITLE } from 'src/app/shared';
+import { APP_TITLE } from 'src/app/config/constants';
 
 @Injectable()
 export class RouteTitleService {

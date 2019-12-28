@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { SpotifyService } from 'src/app/core';
-import { ArtistPageModel } from 'src/app/models/artist-page.model';
+
+import { ArtistPageModel } from './../../shared/models/artist-page.model';
+import { SpotifyService } from 'src/app/core/services/spotify.service';
 
 @Component({
 	selector: 'sp-artist-page',

@@ -1,14 +1,14 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
 import { SpotifyService } from './services/spotify.service';
 import { RouteTitleService } from './services/title.service';
 import { TokenInterceptor } from './services/token.interceptor';
 
-NgModule({
+@NgModule({
 	imports: [
-		HttpClientModule
+		HttpClientModule,
 	],
 	providers: [
 		AuthService,
@@ -21,4 +21,10 @@ NgModule({
 		}
 	]
 })
-export class CoreModule { }
+export class CoreModule {
+	constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+		if (parentModule) {
+			throw new Error(`CoreModule has already been loaded. Import CoreModule modules in the AppModule only.`);
+		}
+	}
+}

@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-
+import { HomePageComponent } from './home/home.component';
 import { AboutPageComponent } from './about/about.component';
 import { ArtistPageComponent } from './artist/artist.component';
-import { HomePageComponent } from './home/home.component';
 
 export enum Paths {
 	ROOT = '',

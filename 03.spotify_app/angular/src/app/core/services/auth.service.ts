@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { CLNT_ID, CLNT_SCRT } from '../constants';
+import { CLNT_ID, CLNT_SCRT } from '../../config/constants';
 
 export interface TokenData {
 	access_token: string;
@@ -38,7 +38,7 @@ export class AuthService {
 		};
 
 		return this.http.post(
-			'/api/token',
+			'https://accounts.spotify.com/api/token',
 			this.getPayload(),
 			options
 		)
@@ -47,7 +47,7 @@ export class AuthService {
 					this.currentToken = `${data.token_type} ${data.access_token}`;
 					return this.currentToken;
 				}),
-				catchError(err => of(null))
+				catchError(err => EMPTY)
 			);
 
 	}
@@ -55,4 +55,4 @@ export class AuthService {
 	private getPayload(): string {
 		return this.payload.toString();
 	}
-} 
+}

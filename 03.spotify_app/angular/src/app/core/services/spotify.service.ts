@@ -1,9 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Albums, AlbumsResponse } from 'src/app/models/albums.model';
-import { ArtistItem, Artists, ArtistsResponse } from 'src/app/models/artist.model';
+import { API_URL, ITEMS_LIMIT } from 'src/app/config/constants';
+import {
+    Artist,
+    ArtistItemResponse,
+    ArtistsCollection,
+    ArtistsCollectionResponse,
+} from 'src/app/shared/models/artists.model';
+
+import { AlbumsCollection, AlbumsCollectionResponse } from './../../shared/models/albums.model';
 
 export enum SearchTypes {
 	ARTIST = 'artist',
@@ -12,15 +19,11 @@ export enum SearchTypes {
 	TRACK = 'track'
 }
 
-export interface searchConfig {
+export interface SearchConfig {
 	q?: string;
 	offset?: string;
 	limit?: string;
 }
-
-export const ITEMS_LIMIT: number = 20;
-
-const API_URL: string = 'https://api.spotify.com/v1/';
 
 @Injectable()
 export class SpotifyService {
@@ -28,7 +31,7 @@ export class SpotifyService {
 		private http: HttpClient
 	) { }
 
-	searchAlbums(config: searchConfig): Observable<Albums> {
+	searchAlbums(config: SearchConfig): Observable<AlbumsCollection> {
 		return config.q
 			? this.http.get(
 				`${API_URL}search`,
@@ -42,12 +45,12 @@ export class SpotifyService {
 				}
 			)
 				.pipe(
-					map(({ albums }: AlbumsResponse) => albums)
+					map((response: AlbumsCollectionResponse) => new AlbumsCollection(response))
 				)
-			: of(null);
+			: EMPTY;
 	}
 
-	searchArtists(config: searchConfig): Observable<Artists> {
+	searchArtists(config: SearchConfig): Observable<ArtistsCollection> {
 		return config.q
 			? this.http.get(
 				`${API_URL}search`,
@@ -61,22 +64,22 @@ export class SpotifyService {
 				}
 			)
 				.pipe(
-					map(({ artists }: ArtistsResponse) => artists)
+					map((response: ArtistsCollectionResponse) => new ArtistsCollection(response))
 				)
-			: of(null);
+			: EMPTY;
 	}
 
-	getArtistById(id: string): Observable<ArtistItem> {
+	getArtistById(id: string): Observable<Artist> {
 		return this.http.get(`${API_URL}artists/${id}`)
 			.pipe(
-				map((response: ArtistItem) => response)
+				map((response: ArtistItemResponse) => new Artist(response))
 			);
 	}
 
-	getAlbumsByArtistId(id: string): Observable<Albums> {
+	getAlbumsByArtistId(id: string): Observable<AlbumsCollection> {
 		return this.http.get(`${API_URL}artists/${id}/albums`)
 			.pipe(
-				map((response: Albums) => response)
+				map((response: AlbumsCollectionResponse) => new AlbumsCollection(response))
 			);
 	}
 }

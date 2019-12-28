@@ -1,8 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 
-import { SharedModule } from '../shared/shared.module';
 import { AlbumComponent } from './album/album.component';
 import { ArtistComponent } from './artist/artist.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -11,22 +16,26 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { SearchComponent } from './search/search.component';
 
 const COMPONENTS = [
-	NavigationComponent,
-	NavbarComponent,
-	SearchComponent,
 	LoaderComponent,
 	ArtistComponent,
-	AlbumComponent
-]
+	AlbumComponent,
+	NavigationComponent,
+	NavbarComponent,
+	SearchComponent
+];
 
 @NgModule({
 	imports: [
+		ReactiveFormsModule,
+		RouterModule,
 		CommonModule,
-		SharedModule,
+		MatToolbarModule,
+		MatInputModule,
+		MatProgressSpinnerModule,
+		MatIconModule,
+		MatButtonModule
 	],
 	declarations: COMPONENTS,
-	exports: [
-		...COMPONENTS
-	]
+	exports: COMPONENTS
 })
-export class ComponenetsModule { }
+export class SharedComponentsModule {}

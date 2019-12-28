@@ -1,10 +1,9 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { tap, flatMap, catchError, mergeMap, switchMap, map, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
-import { Paths } from '../pages/routing';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -17,9 +16,7 @@ export class TokenInterceptor implements HttpInterceptor {
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		let request: HttpRequest<any> = this.authService.token
 			? req.clone({
-				setHeaders: {
-					'Authorization': this.authService.token
-				}
+				setHeaders: { Authorization: this.authService.token }
 			})
 			: req.clone();
 
@@ -31,9 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
 							.pipe(
 								map((token: string) => {
 									request = req.clone({
-										setHeaders: {
-											'Authorization': token
-										}
+										setHeaders: { Authorization: token }
 									});
 
 									return request;

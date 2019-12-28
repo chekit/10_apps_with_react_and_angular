@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouteTitleService } from 'src/app/core';
+import { RouteTitleService } from 'src/app/core/services/title.service';
 
 const PAGE_NAME = 'About';
 

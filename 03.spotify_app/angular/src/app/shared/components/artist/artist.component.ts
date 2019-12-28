@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
-import { ArtistItem, COVER_SIZE } from 'src/app/models/artist.model';
-
-import { Image } from '../../models/base.model';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { COVER_SIZE } from '@app/config/constants';
+import { Artist } from '@app/shared/models/artists.model';
+import { BasicImageData } from '@app/shared/models/basic.model';
 
 @Component({
 	selector: 'sp-artist',
@@ -10,9 +10,9 @@ import { Image } from '../../models/base.model';
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArtistComponent {
-	@Input() model: ArtistItem;
+	@Input() model: Artist;
 
-	get artistPhoto(): Image {
+	get artistPhoto(): BasicImageData {
 		return this.model.images.find(image => image.width === COVER_SIZE) || null;
 	}
 }

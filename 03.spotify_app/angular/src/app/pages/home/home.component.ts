@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subject } from 'rxjs';
-import { filter, first, map, takeUntil } from 'rxjs/operators';
-import { ArtistItem, Artists } from 'src/app/models/artist.model';
-
-import { AlbumItem } from '../../models/albums.model';
-import { ArtistComponent } from 'src/app/shared/components/artist/artist.component';
-import { RouteTitleService, SpotifyService } from 'src/app/core';
+import { filter, first, takeUntil } from 'rxjs/operators';
+import { ITEMS_LIMIT } from 'src/app/config/constants';
+import { SpotifyService } from 'src/app/core/services/spotify.service';
+import { RouteTitleService } from 'src/app/core/services/title.service';
+import { Album } from 'src/app/shared/models/albums.model';
+import { Artist, ArtistsCollection } from 'src/app/shared/models/artists.model';
+import { ArtistComponent } from '@app/shared/components/artist/artist.component';
 
 export enum HomePageStateTypes {
 	ERROR,
@@ -15,7 +15,7 @@ export enum HomePageStateTypes {
 	LOADING
 }
 
-export type HomePageData = string | ArtistItem[];
+export type HomePageData = string | Artist[];
 
 interface HomePageState {
 	type: HomePageStateTypes;
@@ -72,7 +72,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 		this.getArtistsByQuery(query);
 	}
 
-	showArtistInfo({ id }: ArtistItem): void {
+	showArtistInfo({ id }: Artist): void {
 		this.router.navigate([`/artist/${id}`]);
 	}
 
@@ -84,7 +84,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 		return this.state.type === HomePageStateTypes.LOADING;
 	}
 
-	trackById(index: number, item: AlbumItem): string {
+	trackById(index: number, item: Album): string {
 		return item.id;
 	}
 
@@ -118,15 +118,15 @@ export class HomePageComponent implements OnInit, OnDestroy {
 				takeUntil(this.destroy$)
 			)
 			.subscribe(
-				(response: Artists) => {
+				(response: ArtistsCollection) => {
 					let data;
 
 					if (response) {
-						const { items, total, offset } = response;
+						const { artitst, total, offset: responseOffset } = response;
 
-						data = [...(this.state.data as ArtistItem[] || []), ...items];
+						data = [...(this.state.data as Artist[] || []), ...artitst];
 						this.total = total;
-						this.offset = offset;
+						this.offset = responseOffset;
 					}
 
 					this.setState(HomePageStateTypes.DEFAULT, data);
