@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { CLNT_ID, CLNT_SCRT } from '../../config/constants';
+import { CLNT_ID, CLNT_SCRT, TOKEN_URL } from '../../config/constants';
 
 export interface TokenData {
 	access_token: string;
@@ -38,7 +38,7 @@ export class AuthService {
 		};
 
 		return this.http.post(
-			'https://accounts.spotify.com/api/token',
+			TOKEN_URL,
 			this.getPayload(),
 			options
 		)
