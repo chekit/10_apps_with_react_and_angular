@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { API_URL, ITEMS_LIMIT } from 'src/app/config/constants';
 import {
     Artist,
     ArtistItemResponse,
     ArtistsCollection,
-    ArtistsCollectionResponse,
+	ArtistsSearchResponse,
 } from 'src/app/shared/models/artists.model';
 
-import { AlbumsCollection, AlbumsCollectionResponse } from './../../shared/models/albums.model';
+import { AlbumsCollection, AlbumsSearchResponse, AlbumsCollectionResponse } from './../../shared/models/albums.model';
 
 export enum SearchTypes {
 	ARTIST = 'artist',
@@ -45,7 +45,7 @@ export class SpotifyService {
 				}
 			)
 				.pipe(
-					map((response: AlbumsCollectionResponse) => new AlbumsCollection(response))
+					map((response: AlbumsSearchResponse) => new AlbumsCollection(response.albums))
 				)
 			: EMPTY;
 	}
@@ -64,7 +64,7 @@ export class SpotifyService {
 				}
 			)
 				.pipe(
-					map((response: ArtistsCollectionResponse) => new ArtistsCollection(response))
+					map((response: ArtistsSearchResponse) => new ArtistsCollection(response.artists))
 				)
 			: EMPTY;
 	}

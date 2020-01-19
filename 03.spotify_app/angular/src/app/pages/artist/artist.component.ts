@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { forkJoin } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { forkJoin, BehaviorSubject } from 'rxjs';
+import { map, switchMap, pluck } from 'rxjs/operators';
 
 import { ArtistPageModel } from './../../shared/models/artist-page.model';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
@@ -14,33 +14,34 @@ import { SpotifyService } from 'src/app/core/services/spotify.service';
 export class ArtistPageComponent implements OnInit {
 	model: ArtistPageModel;
 
-	private loading: boolean = true;
+	isLoading: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
 	constructor(
 		private route: ActivatedRoute,
-		private spotifySerrvice: SpotifyService
-	) {
-
-	}
+		private spotifyService: SpotifyService
+	) {}
 
 	ngOnInit(): void {
 		this.route.params
 			.pipe(
-				map((params: Params) => params.id),
+				pluck('id'),
 				switchMap((id: string) => {
 					return forkJoin([
-						this.spotifySerrvice.getArtistById(id),
-						this.spotifySerrvice.getAlbumsByArtistId(id)
-					])
+						this.spotifyService.getArtistById(id),
+						this.spotifyService.getAlbumsByArtistId(id)
+					]);
 				})
 			)
-			.subscribe(([artist, albums]: any[]) => {
-				this.model = new ArtistPageModel(artist, albums);
-				this.loading = false;
-			})
-	}
-
-	isLoading(): boolean {
-		return this.loading;
+			.subscribe({
+				next: ([artist, albums]: any[]) => {
+					this.model = new ArtistPageModel(artist, albums);
+					this.isLoading.next(false);
+				},
+				error: err => {
+					console.warn(err);
+					this.isLoading.next(false);
+					this.model = null;
+				}
+			});
 	}
 }

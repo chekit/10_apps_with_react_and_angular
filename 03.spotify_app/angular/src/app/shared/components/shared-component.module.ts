@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 
 import { AlbumComponent } from './album/album.component';
 import { ArtistComponent } from './artist/artist.component';
+import { MessageComponent } from './message/message.component';
 import { LoaderComponent } from './loader/loader.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -21,7 +22,8 @@ const COMPONENTS = [
 	AlbumComponent,
 	NavigationComponent,
 	NavbarComponent,
-	SearchComponent
+	SearchComponent,
+	MessageComponent
 ];
 
 @NgModule({

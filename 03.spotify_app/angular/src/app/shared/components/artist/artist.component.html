@@ -1,7 +1,7 @@
 <div class="artist">
 	<div class="cover">
 		<ng-container *ngIf="artistPhoto; else nophoto">
-			<img [src]="artistPhoto.url" [width]="artistPhoto.width" [height]="artistPhoto.height" alt=""
+			<img [src]="artistPhoto.url" [width]="artistPhoto.width" [height]="artistPhoto.height" [alt]="model.name"
 				class="cover__image" />
 		</ng-container>
 	</div>

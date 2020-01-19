@@ -1,8 +1,8 @@
-
+import { Artist, ArtistItemResponse } from './artists.model';
 import { BasicDataItem, BasicDataItemResponse, BasicItemsCollection, BasicItemsCollectionResponse } from './basic.model';
-import { ArtistsResponse, Artist, ArtistItemResponse } from './artists.model';
 
-export interface AlbumsResponse {
+
+export interface AlbumsSearchResponse {
 	albums: AlbumsCollectionResponse;
 }
 
@@ -31,24 +31,20 @@ export enum AlbumType {
 }
 
 export class AlbumsCollection extends BasicItemsCollection {
-	private _items: Album[] = [];
+	albums: Album[] = [];
 
 	constructor(protected data: AlbumsCollectionResponse) {
 		super(data);
-		this._items = data.items.map(item => new Album(item));
-	}
-
-	get albums(): Album[] {
-		return this._items;
+		this.albums = data.items.map(item => new Album(item));
 	}
 }
 
 export class Album extends BasicDataItem {
-	private _artists: Artist[] = [];
+	artists: Artist[] = [];
 
 	constructor(protected data: AlbumItemResponse) {
 		super(data);
-		this._artists = data.artists.map(artist => new Artist(artist));
+		this.artists = data.artists.map(artist => new Artist(artist));
 	}
 
 	get available_markets(): string[] {
@@ -56,9 +52,6 @@ export class Album extends BasicDataItem {
 	}
 	get album_type(): AlbumType {
 		return this.data.album_type;
-	}
-	get artists(): Artist[] {
-		return this._artists;
 	}
 	get type(): AlbumType {
 		return this.data.type;

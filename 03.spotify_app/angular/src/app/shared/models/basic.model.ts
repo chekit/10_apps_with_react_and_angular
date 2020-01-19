@@ -35,9 +35,6 @@ export class BasicItemsCollection extends BasicResponseModel<BasicItemsCollectio
 	get href(): string {
 		return this.data.href;
 	}
-	get albums(): BasicDataItemResponse[] {
-		return this.data.items;
-	}
 	get limit(): number {
 		return this.data.limit;
 	}
@@ -56,16 +53,13 @@ export class BasicItemsCollection extends BasicResponseModel<BasicItemsCollectio
 }
 
 export class BasicDataItem extends BasicResponseModel<BasicDataItemResponse> {
-	private _images: BasicImageData[] = [];
+	images: BasicImageData[] = [];
 
 	constructor(protected data: BasicDataItemResponse) {
 		super(data);
-		this._images = data.images.map(item => new BasicImageData(item));
+		this.images = data.images.map(item => new BasicImageData(item));
 	}
 
-	get images(): BasicImageData[] {
-		return this._images;
-	}
 	get external_urls(): ExternalUrls {
 		return this.data.external_urls;
 	}

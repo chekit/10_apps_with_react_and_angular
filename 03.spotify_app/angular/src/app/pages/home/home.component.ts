@@ -7,7 +7,7 @@ import { SpotifyService } from 'src/app/core/services/spotify.service';
 import { RouteTitleService } from 'src/app/core/services/title.service';
 import { Album } from 'src/app/shared/models/albums.model';
 import { Artist, ArtistsCollection } from 'src/app/shared/models/artists.model';
-import { ArtistComponent } from '@app/shared/components/artist/artist.component';
+import { ArtistComponent } from 'src/app/shared/components/artist/artist.component';
 
 export enum HomePageStateTypes {
 	ERROR,
@@ -37,7 +37,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	state: HomePageState = {
 		type: HomePageStateTypes.DEFAULT,
 		data: null
-	}
+	};
 
 	private offset: number = 0;
 	private total: number = 0;
@@ -122,16 +122,16 @@ export class HomePageComponent implements OnInit, OnDestroy {
 					let data;
 
 					if (response) {
-						const { artitst, total, offset: responseOffset } = response;
+						const { artists, total, offset: responseOffset } = response;
 
-						data = [...(this.state.data as Artist[] || []), ...artitst];
+						data = [...(this.state.data as Artist[] || []), ...artists];
 						this.total = total;
 						this.offset = responseOffset;
 					}
 
 					this.setState(HomePageStateTypes.DEFAULT, data);
 				},
-				() => this.setState(HomePageStateTypes.ERROR, 'Something goes wrong!')
+				() => this.setState(HomePageStateTypes.ERROR, 'Something went wrong!')
 			);
 	}
 

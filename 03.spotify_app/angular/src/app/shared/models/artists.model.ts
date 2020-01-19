@@ -1,6 +1,6 @@
 import { BasicItemsCollectionResponse, BasicDataItemResponse, BasicDataItem, BasicItemsCollection } from './basic.model';
 
-export interface ArtistsResponse {
+export interface ArtistsSearchResponse {
 	artists: ArtistsCollectionResponse;
 }
 
@@ -35,16 +35,13 @@ export class Followers implements FollowersResponse {
 }
 
 export class Artist extends BasicDataItem {
-	private _folowwers: Followers = null;
+	followers: Followers = null;
 
 	constructor(protected data: ArtistItemResponse) {
 		super(data);
-		this._folowwers = new Followers(data.followers);
+		this.followers = new Followers(data.followers);
 	}
 
-	get followers(): Followers {
-		return this._folowwers;
-	}
 	get type(): ArtistType {
 		return this.data.type;
 	}
@@ -57,14 +54,10 @@ export class Artist extends BasicDataItem {
 }
 
 export class ArtistsCollection extends BasicItemsCollection {
-	private _artists: Artist[] = [];
+	public artists: Artist[] = [];
 
 	constructor(protected data: ArtistsCollectionResponse) {
 		super(data);
-		this._artists = data.items.map(artist => new Artist(artist));
-	}
-
-	get artitst(): Artist[] {
-		return this._artists;
+		this.artists = data.items.map(artist => new Artist(artist));
 	}
 }

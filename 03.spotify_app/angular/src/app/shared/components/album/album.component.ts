@@ -14,7 +14,7 @@ export class AlbumComponent {
 	@Input() model: Album;
 
 	get albumImage(): string {
-		const [image]: BasicImageData[] = this.model.images.filter((image: BasicImageData) => image.width === COVER_SIZE);
+		const [image]: BasicImageData[] = this.model.images.filter((item: BasicImageData) => item.width === COVER_SIZE);
 
 		return image ? image.url : null;
 	}
