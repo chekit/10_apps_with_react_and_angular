@@ -57,7 +57,9 @@ export class BasicDataItem extends BasicResponseModel<BasicDataItemResponse> {
 
 	constructor(protected data: BasicDataItemResponse) {
 		super(data);
-		this.images = data.images.map(item => new BasicImageData(item));
+		if (data.images) {
+			this.images = data.images.map(item => new BasicImageData(item));
+ 		}
 	}
 
 	get external_urls(): ExternalUrls {
