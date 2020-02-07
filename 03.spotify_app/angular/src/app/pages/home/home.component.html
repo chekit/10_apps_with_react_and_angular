@@ -23,9 +23,7 @@
 </section>
 
 <ng-template #error>
-	<div class="error">
-		<p>{{ state.data }}</p>
-	</div>
+	<sp-message [message]="state.data"></sp-message>
 </ng-template>
 
 <ng-template #empty>

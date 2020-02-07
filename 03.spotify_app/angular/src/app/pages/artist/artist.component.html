@@ -1,6 +1,6 @@
-<ng-container *ngIf="!isLoading(); else loading">
+<ng-container *ngIf="!(isLoading | async); else loading">
 	<ng-container *ngIf="!!model; else nodata">
-		<div class="artist" >
+		<div class="artist" *ngIf="model.artist">
 			<h1 class="artist__name">{{ model.artist.name }}</h1>
 			<ng-container *ngIf="model.artistImage; else nophoto">
 				<div class="artist__image">
@@ -15,7 +15,7 @@
 				</ul>
 			</div>
 			<div class="albums">
-				<ng-container *ngFor="let album of model.albums.items">
+				<ng-container *ngFor="let album of model.albums.albums">
 					<sp-album [model]="album" class="albums__item"></sp-album>
 				</ng-container>
 			</div>
@@ -24,17 +24,11 @@
 </ng-container>
 
 <ng-template #loading>
-	<div class="loader" >
-		<sp-loader>
-			Loading...
-		</sp-loader>
-	</div>
+	<sp-loader>Loading...</sp-loader>
 </ng-template>
 
 <ng-template #nodata>
-	<div class="nodata">
-		<p>Couldn't get any data.</p>
-	</div>
+	<sp-message [type]="'error'">Something went wrong.</sp-message>
 </ng-template>
 
 <ng-template #nophoto>

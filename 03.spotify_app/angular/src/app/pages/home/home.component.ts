@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, Subject } from 'rxjs';
-import { filter, first, map, takeUntil } from 'rxjs/operators';
-import { ArtistComponent } from 'src/app/components/artist/artist.component';
-import { ArtistItem, Artists } from 'src/app/models/artist.model';
-
-import { AlbumItem } from '../../models/albums.model';
-import { SpotifyService, ITEMS_LIMIT } from '../../services/spotify.service';
-import { RouteTitleService } from 'src/app/services/title.service';
+import { filter, first, takeUntil } from 'rxjs/operators';
+import { ITEMS_LIMIT } from 'src/app/config/constants';
+import { SpotifyService } from 'src/app/core/services/spotify.service';
+import { RouteTitleService } from 'src/app/core/services/title.service';
+import { Album } from 'src/app/shared/models/albums.model';
+import { Artist, ArtistsCollection } from 'src/app/shared/models/artists.model';
+import { ArtistComponent } from 'src/app/shared/components/artist/artist.component';
 
 export enum HomePageStateTypes {
 	ERROR,
@@ -16,7 +15,7 @@ export enum HomePageStateTypes {
 	LOADING
 }
 
-export type HomePageData = string | ArtistItem[];
+export type HomePageData = string | Artist[];
 
 interface HomePageState {
 	type: HomePageStateTypes;
@@ -38,7 +37,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	state: HomePageState = {
 		type: HomePageStateTypes.DEFAULT,
 		data: null
-	}
+	};
 
 	private offset: number = 0;
 	private total: number = 0;
@@ -73,7 +72,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 		this.getArtistsByQuery(query);
 	}
 
-	showArtistInfo({ id }: ArtistItem): void {
+	showArtistInfo({ id }: Artist): void {
 		this.router.navigate([`/artist/${id}`]);
 	}
 
@@ -85,7 +84,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 		return this.state.type === HomePageStateTypes.LOADING;
 	}
 
-	trackById(index: number, item: AlbumItem): string {
+	trackById(index: number, item: Album): string {
 		return item.id;
 	}
 
@@ -119,20 +118,20 @@ export class HomePageComponent implements OnInit, OnDestroy {
 				takeUntil(this.destroy$)
 			)
 			.subscribe(
-				(response: Artists) => {
+				(response: ArtistsCollection) => {
 					let data;
 
 					if (response) {
-						const { items, total, offset } = response;
+						const { artists, total, offset: responseOffset } = response;
 
-						data = [...(this.state.data as ArtistItem[] || []), ...items];
+						data = [...(this.state.data as Artist[] || []), ...artists];
 						this.total = total;
-						this.offset = offset;
+						this.offset = responseOffset;
 					}
 
 					this.setState(HomePageStateTypes.DEFAULT, data);
 				},
-				() => this.setState(HomePageStateTypes.ERROR, 'Something goes wrong!')
+				() => this.setState(HomePageStateTypes.ERROR, 'Something went wrong!')
 			);
 	}
 

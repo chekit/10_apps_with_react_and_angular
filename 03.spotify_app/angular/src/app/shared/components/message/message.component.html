@@ -1,0 +1,9 @@
+<div class="message" [class.error]="type === messageTypes.ERROR">
+	<i class="material-icons message__icon">{{ getIconName() }}</i>
+	<p class="message__text">
+		<ng-container *ngIf="message">
+			{{ message }}
+		</ng-container>
+		<ng-content></ng-content>
+	</p>
+</div>

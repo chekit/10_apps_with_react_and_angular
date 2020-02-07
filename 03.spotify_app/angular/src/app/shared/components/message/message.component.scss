@@ -1,0 +1,13 @@
+:host {
+	margin: 1em;
+
+	.message {
+		padding: 20px;
+		text-align: center;
+		color: rgb(0, 199, 0);
+	}
+	
+	.error {
+		color: rgb(255, 75, 75);
+	}
+}
