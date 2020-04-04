@@ -2,18 +2,31 @@
 	<ng-container *ngIf="!!model; else nodata">
 		<div class="artist" *ngIf="model.artist">
 			<h1 class="artist__name">{{ model.artist.name }}</h1>
-			<ng-container *ngIf="model.artistImage; else nophoto">
-				<div class="artist__image">
-					<img [src]="model.artistImage" [alt]="model.artist.name" />
+			<div class="artist__media columns">
+				<div class="column">
+					<ng-container *ngIf="model.artistImage; else nophoto">
+						<div class="artist__image">
+							<img [src]="model.artistImage" [alt]="model.artist.name" />
+						</div>
+					</ng-container>
 				</div>
-			</ng-container>
-			<div class="artist_geners">
-				<ul class="genres-list">
-					<li class="genres-list__item" *ngFor="let genre of model.artist.genres">
-						{{ genre }}
-					</li>
-				</ul>
+				<div class="column" *ngIf="externalResources.length > 0">
+					<h2 class="column__header"><span class="material-icons external-links__icon">web</span>&nbsp;Extrenal links</h2>
+					<ul class="external-links">
+						<ng-container *ngFor="let resource of externalResources">
+							<li class="external-links__item">
+								<span>{{ resource[0] | titlecase }}</span>:&nbsp;
+								<a [attr.href]="resource[1]" [attr.title]="resource[0]" target="_blank">{{ resource[1] }}</a>
+							</li>
+						</ng-container>
+					</ul>
+				</div>
 			</div>
+			<ul class="genre-list">
+				<li class="genre-list__item" *ngFor="let genre of model.artist.genres">
+					{{ genre }}
+				</li>
+			</ul>
 			<div class="albums">
 				<ng-container *ngFor="let album of model.albums.albums">
 					<sp-album [model]="album" class="albums__item"></sp-album>

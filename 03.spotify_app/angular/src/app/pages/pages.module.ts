@@ -17,7 +17,7 @@ import { PagesWrapperComponent } from './wrapper/pages-wrapper.component';
 		RouterModule.forRoot(appRoutes),
 		SharedModule,
 		SharedComponentsModule,
-		MatIconModule
+		MatIconModule,
 	],
 	declarations: [
 		PagesWrapperComponent,

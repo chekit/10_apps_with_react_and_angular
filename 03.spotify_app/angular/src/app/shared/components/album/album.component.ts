@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { COVER_SIZE } from '@app/config/constants';
-import { BasicImageData } from '@app/shared/models/basic.model';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { Album } from './../../models/albums.model';
+import { BasicImageData } from '../../models/basic.model';
+import { COVER_SIZE } from 'src/app/config/constants';
+
+const MAIN_SOURCE: string = 'spotify';
 
 @Component({
 	selector: 'sp-album',
@@ -10,12 +12,16 @@ import { Album } from './../../models/albums.model';
 	styleUrls: ['./album.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AlbumComponent {
+export class AlbumComponent implements OnInit {
 	@Input() model: Album;
 
-	get albumImage(): string {
+	albumUrl: string;
+	albumImage: string;
+
+	ngOnInit(): void {
 		const [image]: BasicImageData[] = this.model.images.filter((item: BasicImageData) => item.width === COVER_SIZE);
 
-		return image ? image.url : null;
+		this.albumUrl = this.model.external_urls[MAIN_SOURCE];
+		this.albumImage = image ? image.url : null;
 	}
 }

@@ -1,14 +1,29 @@
-<div class="album">
-	<ng-container *ngIf="albumImage; else nocover">
-		<div class="album__cover">
-			<img [src]="albumImage" [alt]="model.name" />
-		</div>
-	</ng-container>
-	<p class="album__name">{{ model.name }}</p>
-</div>
+<ng-container *ngIf="albumUrl; else noAlbumUrl">
+	<a class="album" [attr.href]="albumUrl" target="_blank">
+		<ng-container *ngTemplateOutlet="coverContainer; context: { album: model, image: albumImage }"></ng-container>
+	</a>
+</ng-container>
 
 <ng-template #nocover>
 	<div class="empty">
 		<mat-icon>image</mat-icon>
+	</div>
+</ng-template>
+
+<ng-template #coverContainer let-model="album" let-image="image">
+	<ng-container *ngIf="image; else nocover">
+		<div class="album__cover">
+			<img [src]="image" [alt]="model.name" />
+		</div>
+	</ng-container>
+	<p class="album__title">
+		<span class="material-icons album__icon">album</span>
+		<span class="album__name">{{ model.name }}</span>
+	</p>
+</ng-template>
+
+<ng-template #noAlbumUrl>
+	<div class="album">
+		<ng-container *ngTemplateOutlet="coverContainer; context: { album: model, image: albumImage }"></ng-container>
 	</div>
 </ng-template>

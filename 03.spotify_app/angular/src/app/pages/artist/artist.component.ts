@@ -16,6 +16,8 @@ export class ArtistPageComponent implements OnInit {
 
 	isLoading: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
+	externalResources: [string, string][] = [];
+
 	constructor(
 		private route: ActivatedRoute,
 		private spotifyService: SpotifyService
@@ -35,6 +37,7 @@ export class ArtistPageComponent implements OnInit {
 			.subscribe({
 				next: ([artist, albums]: any[]) => {
 					this.model = new ArtistPageModel(artist, albums);
+					this.externalResources = Object.entries(this.model.artist.external_urls);
 					this.isLoading.next(false);
 				},
 				error: err => {
