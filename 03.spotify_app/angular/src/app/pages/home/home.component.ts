@@ -30,7 +30,7 @@ const PAGE_NAME = 'Home';
 	styleUrls: ['./home.component.scss']
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-	@ViewChild(ArtistComponent, { static: false }) artistComponent: ArtistComponent;
+	@ViewChild(ArtistComponent) artistComponent: ArtistComponent;
 
 	currentQuery: string;
 
