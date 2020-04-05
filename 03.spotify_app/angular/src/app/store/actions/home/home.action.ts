@@ -6,7 +6,7 @@ export enum HomeActionTypes {
     SET_QUERY = '[Home] Set user query',
     LOAD_ARTISTS = '[Home] Load Artists',
     LOAD_ARTISTS_SUCCESS = '[Home] Load Artists Success',
-    LOAD_ARTISTS_FAILURE = '[Home] Load Artists Failure'
+    LOAD_ARTISTS_FAILURE = '[Home] Load Artists Failure',
 }
 
 export class SetQueryAction implements Action {

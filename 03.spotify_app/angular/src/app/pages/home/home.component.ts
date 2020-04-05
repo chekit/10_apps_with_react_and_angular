@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { forkJoin, fromEvent, Observable, Subject, combineLatest } from 'rxjs';
-import { filter, switchMap, takeUntil, exhaustMap } from 'rxjs/operators';
+import { forkJoin, fromEvent, Observable, Subject, combineLatest, of } from 'rxjs';
+import { filter, switchMap, takeUntil, exhaustMap, tap, delay, distinctUntilChanged, map } from 'rxjs/operators';
 import { ITEMS_LIMIT } from 'src/app/config/constants';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
 import { RouteTitleService } from 'src/app/core/services/title.service';
@@ -38,6 +38,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	currentQuery$: Observable<string>;
 	loading$: Observable<boolean>;
 	error$: Observable<string>;
+	total$: Observable<number>;
 	artists$: Observable<Artist[]>;
 
 	private offset: number = 0;
@@ -50,7 +51,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private routeTitle: RouteTitleService,
-		private spotifyService: SpotifyService,
 		private route: ActivatedRoute,
 		private router: Router,
 		private store: Store<fromStore.AppState>
@@ -63,6 +63,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 		this.loading$ = this.store.pipe(select(fromStore.selectLoading));
 		this.error$ = this.store.pipe(select(fromStore.selectError));
 		this.artists$ = this.store.pipe(select(fromStore.selectArtists));
+		this.total$ = this.store.pipe(select(fromStore.selectTotal));
 
 		// this.initPageByScroll();
 	}
@@ -88,26 +89,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	private initPageByScroll(): void {
 		fromEvent(document.body, 'scroll')
 			.pipe(
+				distinctUntilChanged(),
 				filter((event: Event) => {
 					const body = event.target as HTMLElement;
 					const scrollEvailable = Math.floor(body.scrollHeight - body.getBoundingClientRect().height);
 					const scrolled = Math.round(body.scrollTop);
-
+					console.log(scrolled, scrollEvailable);
 					return scrolled >= scrollEvailable;
 				}),
-				exhaustMap(() => combineLatest([
-					this.store.pipe(select(fromStore.selectCollectionData)),
-					this.store.pipe(select(fromStore.selectQuery))
+				switchMap(() => combineLatest([
+					this.store.pipe(select(fromStore.selectArtists)),
+					this.store.pipe(select(fromStore.selectTotal)),
 				])),
-				filter(([data, query]: [ArtistsCollection, string]) => data
-					? data.total > data.artists.length
-					: false
-				),
+				tap((data) => console.log(data)),
+				filter(([data, total]: [Artist[], number]) => !!data && !!total),
+				filter(([data, total]: [Artist[], number]) => total > data.length),
+				switchMap(() => combineLatest([
+					this.store.pipe(select(fromStore.selectOffset)),
+					this.store.pipe(select(fromStore.selectQuery)),
+				])),
+				tap(([offset, query]: [number, string]) => {
+					return of(this.store.dispatch(new fromStore.LoadArtistsAction({ q: query, offset: `${offset + ITEMS_LIMIT}` })));
+				}),
 				takeUntil(this.destroy$)
 			)
-			.subscribe(([data, query]: [ArtistsCollection, string]) => {
-				this.store.dispatch(new fromStore.LoadArtistsAction({ q: query, offset: `${data.offset + ITEMS_LIMIT}` }));
+			.subscribe(() => {
+				console.log('test')
 			});
 	}
-
 }

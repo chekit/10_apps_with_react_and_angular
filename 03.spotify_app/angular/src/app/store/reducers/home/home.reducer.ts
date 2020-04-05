@@ -10,7 +10,9 @@ import {
 
 export interface HomeState {
     query: string;
-    collection: ArtistsCollection;
+    collection: Artist[];
+    total: number;
+    offset: number;
     error: string;
     loading: boolean;
 }
@@ -18,6 +20,8 @@ export interface HomeState {
 const homeInitialState: HomeState = {
     query: '',
     collection: null,
+    total: 0,
+    offset: 0,
     error: '',
     loading: false
 };
@@ -37,14 +41,18 @@ export function homeReducer(state: HomeState = homeInitialState, action: HomeAct
         case HomeActionTypes.LOAD_ARTISTS_SUCCESS:
             return {
                 ...state,
-                collection: (action as LoadArtistsSuccesAction).payload,
+                collection: state.collection
+                    ? [...state.collection, ...(action as LoadArtistsSuccesAction).payload.artists]
+                    : (action as LoadArtistsSuccesAction).payload.artists,
+                total: (action as LoadArtistsSuccesAction).payload.total,
+                offset: (action as LoadArtistsSuccesAction).payload.offset,
                 loading: false,
                 error: ''
             };
         case HomeActionTypes.LOAD_ARTISTS_FAILURE:
             return {
                 ...state,
-                collection: null,
+                collection: state.collection || null,
                 loading: false,
                 error: (action as LoadArtistsFailureAction).payload
             };

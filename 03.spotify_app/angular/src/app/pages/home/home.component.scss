@@ -35,4 +35,8 @@
 			}
 		}
 	}
+
+	::ng-deep .mat-chip-list-wrapper {
+		justify-content: center;
+	}
 }

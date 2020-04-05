@@ -6,13 +6,18 @@
 	<ps-search (queryChange)="onQueryChange($event)" [query]="currentQuery$ | async"></ps-search>
 	<ng-container *ngIf="!(error$ | async); else error">
 		<div class="content">
-			<div class="artists">
-				<ng-container *ngIf="artists$ | async as artists; else empty">
+			<ng-container *ngIf="artists$ | async as artists; else empty">
+				<div class="artists">
 					<ng-container *ngFor="let artist of artists; trackBy: trackById">
 						<sp-artist class="artists__item" [model]="artist" (click)="showArtistInfo(artist)"></sp-artist>
 					</ng-container>
-				</ng-container>
-			</div>
+				</div>
+				<mat-chip-list>
+					<mat-chip color="primary" selected>
+						Loaded {{ artists.length }} of {{ total$ | async }}
+					</mat-chip>
+				</mat-chip-list>
+			</ng-container>
 			<div class="loader" *ngIf="loading$ | async">
 				<sp-loader>
 					Loading...
