@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { APP_TITLE } from './../../config/constants';
 
 @Component({
@@ -7,5 +7,8 @@ import { APP_TITLE } from './../../config/constants';
 	styleUrls: ['./pages-wrapper.component.scss']
 })
 export class PagesWrapperComponent {
+	@Input() loading: boolean = false;
+	@Input('error') errorMessage: string = '';
+
 	appTitle = APP_TITLE;
 }

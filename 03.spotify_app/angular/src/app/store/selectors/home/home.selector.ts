@@ -6,9 +6,9 @@ import { ArtistsCollection } from 'src/app/shared/models/artists.model';
 
 export const getHomeState = (state: AppState) => state.home;
 
-export const selectQuery = createSelector(getHomeState, (state: HomeState) => state.query);
-export const selectLoading = createSelector(getHomeState, (state: HomeState) => state.loading);
-export const selectArtists = createSelector(getHomeState, (state: HomeState) => state.collection);
-export const selectTotal = createSelector(getHomeState, (state: HomeState) => state.total);
-export const selectOffset = createSelector(getHomeState, (state: HomeState) => state.offset);
-export const selectError = createSelector(getHomeState, (state: HomeState) => state.error);
+export const selectHomeQuery = createSelector(getHomeState, (state: HomeState) => state.query);
+export const selectHomeLoading = createSelector(getHomeState, (state: HomeState) => state.loading);
+export const selectHomeArtists = createSelector(getHomeState, (state: HomeState) => state.collection);
+export const selectHomeTotal = createSelector(getHomeState, (state: HomeState) => state.total);
+export const selectHomeOffset = createSelector(getHomeState, (state: HomeState) => state.offset);
+export const selectHomeError = createSelector(getHomeState, (state: HomeState) => state.error);

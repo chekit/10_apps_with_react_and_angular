@@ -41,9 +41,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	total$: Observable<number>;
 	artists$: Observable<Artist[]>;
 
-	private offset: number = 0;
-	private total: number = 0;
-
 	private itemsPerPage: number = 10;
 	private itemHeight: number = 30;
 
@@ -51,7 +48,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private routeTitle: RouteTitleService,
-		private route: ActivatedRoute,
 		private router: Router,
 		private store: Store<fromStore.AppState>
 	) { }
@@ -59,11 +55,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.routeTitle.setTitle(PAGE_NAME);
 
-		this.currentQuery$ = this.store.pipe(select(fromStore.selectQuery));
-		this.loading$ = this.store.pipe(select(fromStore.selectLoading));
-		this.error$ = this.store.pipe(select(fromStore.selectError));
-		this.artists$ = this.store.pipe(select(fromStore.selectArtists));
-		this.total$ = this.store.pipe(select(fromStore.selectTotal));
+		this.currentQuery$ = this.store.pipe(select(fromStore.selectHomeQuery));
+		this.loading$ = this.store.pipe(select(fromStore.selectHomeLoading));
+		this.error$ = this.store.pipe(select(fromStore.selectHomeError));
+		this.artists$ = this.store.pipe(select(fromStore.selectHomeArtists));
+		this.total$ = this.store.pipe(select(fromStore.selectHomeTotal));
 
 		// this.initPageByScroll();
 	}
@@ -98,15 +94,15 @@ export class HomePageComponent implements OnInit, OnDestroy {
 					return scrolled >= scrollEvailable;
 				}),
 				switchMap(() => combineLatest([
-					this.store.pipe(select(fromStore.selectArtists)),
-					this.store.pipe(select(fromStore.selectTotal)),
+					this.store.pipe(select(fromStore.selectHomeArtists)),
+					this.store.pipe(select(fromStore.selectHomeTotal)),
 				])),
 				tap((data) => console.log(data)),
 				filter(([data, total]: [Artist[], number]) => !!data && !!total),
 				filter(([data, total]: [Artist[], number]) => total > data.length),
 				switchMap(() => combineLatest([
-					this.store.pipe(select(fromStore.selectOffset)),
-					this.store.pipe(select(fromStore.selectQuery)),
+					this.store.pipe(select(fromStore.selectHomeOffset)),
+					this.store.pipe(select(fromStore.selectHomeQuery)),
 				])),
 				tap(([offset, query]: [number, string]) => {
 					return of(this.store.dispatch(new fromStore.LoadArtistsAction({ q: query, offset: `${offset + ITEMS_LIMIT}` })));

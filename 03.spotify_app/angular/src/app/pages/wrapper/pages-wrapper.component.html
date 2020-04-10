@@ -1,6 +1,17 @@
 <ps-navbar [title]="appTitle"></ps-navbar>
 <div class="wrapper">
 	<main class="main">
-		<router-outlet></router-outlet>
+		<ng-container *ngIf="!loading; else loader">
+			<ng-container *ngIf="errorMessage">
+				<sp-message type="error" [message]="errorMessage"></sp-message>
+			</ng-container>
+			<router-outlet></router-outlet>
+		</ng-container>
 	</main>
 </div>
+
+<ng-template #loader>
+	<div class="loading">
+		<sp-loader></sp-loader>
+	</div>
+</ng-template>

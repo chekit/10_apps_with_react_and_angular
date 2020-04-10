@@ -19,7 +19,7 @@ import { PagesWrapperComponent } from './wrapper/pages-wrapper.component';
 		SharedModule,
 		SharedComponentsModule,
 		MatIconModule,
-		MatChipsModule
+		MatChipsModule,
 	],
 	declarations: [
 		PagesWrapperComponent,

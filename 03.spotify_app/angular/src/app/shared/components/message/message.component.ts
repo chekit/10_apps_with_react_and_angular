@@ -17,7 +17,15 @@ const ICONS = {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageComponent {
-	@Input() type: MessageType = MessageType.DEFAULT;
+	private messageType: MessageType;
+
+	@Input() set type(value: MessageType) {
+		this.messageType = value || MessageType.DEFAULT;
+	}
+	get type() {
+		return this.messageType;
+	}
+
 	@Input() message: string = '';
 
 	messageTypes: typeof MessageType = MessageType;
