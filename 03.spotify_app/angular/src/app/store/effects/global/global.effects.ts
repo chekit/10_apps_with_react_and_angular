@@ -20,7 +20,7 @@ export class GlobalEffects {
             ofType(GlobalActionTypes.GET_TOKEN),
             switchMap((action: LoadArtistsAction) => this.authService.fetchToken()
                 .pipe(
-                    map((result: string) => new GetTokeSuccessAction(result)),
+                    map(() => new GetTokeSuccessAction()),
                     catchError(() => of(new GetTokeFailureAction('Failed to connect.')))
                 )
             )

@@ -12,8 +12,6 @@ export class GetTokeAction implements Action {
 
 export class GetTokeSuccessAction implements Action {
     type = GlobalActionTypes.GET_TOKEN_SUCCESS;
-
-    constructor(public payload: string) {}
 }
 
 export class GetTokeFailureAction implements Action {

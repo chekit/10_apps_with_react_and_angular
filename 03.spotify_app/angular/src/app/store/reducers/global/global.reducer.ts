@@ -7,7 +7,6 @@ export interface GlobalState {
 }
 
 export const globalInititalState: GlobalState = {
-    // token: null,
     error: null,
     loading: false
 };
@@ -22,14 +21,12 @@ export function globalReducer(state: GlobalState, action: GlobalActions): Global
         case GlobalActionTypes.GET_TOKEN_SUCCESS:
             return {
                 ...state,
-                // token: (action as GetTokeSuccessAction).payload,
                 error: null,
                 loading: false
             };
         case GlobalActionTypes.GET_TOKEN_FAILURE:
             return {
                 ...state,
-                // token: null,
                 error: (action as GetTokeSuccessAction).payload,
                 loading: false
             };
