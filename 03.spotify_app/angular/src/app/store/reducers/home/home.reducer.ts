@@ -6,6 +6,7 @@ import {
     LoadArtistsFailureAction,
     LoadArtistsSuccesAction,
     SetQueryAction,
+    LoadArtistsAction,
 } from '../../actions';
 
 export interface HomeState {
@@ -31,7 +32,9 @@ export function homeReducer(state: HomeState = homeInitialState, action: HomeAct
         case HomeActionTypes.SET_QUERY:
             return {
                 ...state,
-                query: (action as SetQueryAction).payload
+                query: (action as SetQueryAction).payload,
+                offset: 0,
+                collection: null
             };
         case HomeActionTypes.LOAD_ARTISTS:
             return {

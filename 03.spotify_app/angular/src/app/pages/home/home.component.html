@@ -12,7 +12,7 @@
 						<sp-artist class="artists__item" [model]="artist" (click)="showArtistInfo(artist)"></sp-artist>
 					</ng-container>
 				</div>
-				<mat-chip-list>
+				<mat-chip-list  *ngIf="!(loading$ | async)">
 					<mat-chip color="primary" selected>
 						Loaded {{ artists.length }} of {{ total$ | async }}
 					</mat-chip>

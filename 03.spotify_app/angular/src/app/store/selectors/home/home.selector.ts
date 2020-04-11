@@ -2,7 +2,6 @@ import { createSelector } from '@ngrx/store';
 
 import { AppState } from '../..';
 import { HomeState } from '../../reducers';
-import { ArtistsCollection } from 'src/app/shared/models/artists.model';
 
 export const getHomeState = (state: AppState) => state.home;
 
@@ -12,3 +11,6 @@ export const selectHomeArtists = createSelector(getHomeState, (state: HomeState)
 export const selectHomeTotal = createSelector(getHomeState, (state: HomeState) => state.total);
 export const selectHomeOffset = createSelector(getHomeState, (state: HomeState) => state.offset);
 export const selectHomeError = createSelector(getHomeState, (state: HomeState) => state.error);
+
+export const selectArtistsAndTotal = createSelector(selectHomeTotal, selectHomeArtists, (total, artists) => ({ total, artists }));
+export const selectQueryAndOffset = createSelector(selectHomeOffset, selectHomeQuery, (offset, query) => ({ offset, query }));

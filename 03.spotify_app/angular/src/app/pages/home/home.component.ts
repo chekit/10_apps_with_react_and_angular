@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { forkJoin, fromEvent, Observable, Subject, combineLatest, of } from 'rxjs';
-import { filter, switchMap, takeUntil, exhaustMap, tap, delay, distinctUntilChanged, map } from 'rxjs/operators';
+import { forkJoin, fromEvent, Observable, Subject, combineLatest, of, from } from 'rxjs';
+import { filter, switchMap, takeUntil, exhaustMap, tap, delay, distinctUntilChanged, map, debounceTime, throttleTime } from 'rxjs/operators';
 import { ITEMS_LIMIT } from 'src/app/config/constants';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
 import { RouteTitleService } from 'src/app/core/services/title.service';
@@ -61,7 +61,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 		this.artists$ = this.store.pipe(select(fromStore.selectHomeArtists));
 		this.total$ = this.store.pipe(select(fromStore.selectHomeTotal));
 
-		// this.initPageByScroll();
+		this.initPageByScroll();
 	}
 
 	ngOnDestroy(): void {
@@ -71,7 +71,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 	onQueryChange(query: string): void {
 		this.store.dispatch(new fromStore.SetQueryAction(query));
-		this.store.dispatch(new fromStore.LoadArtistsAction({ q: query }));
+
+		if (!!query) {
+			this.store.dispatch(new fromStore.LoadArtistsAction({ q: query }));
+		}
 	}
 
 	showArtistInfo({ id }: Artist): void {
@@ -90,27 +93,19 @@ export class HomePageComponent implements OnInit, OnDestroy {
 					const body = event.target as HTMLElement;
 					const scrollEvailable = Math.floor(body.scrollHeight - body.getBoundingClientRect().height);
 					const scrolled = Math.round(body.scrollTop);
-					console.log(scrolled, scrollEvailable);
+
 					return scrolled >= scrollEvailable;
 				}),
-				switchMap(() => combineLatest([
-					this.store.pipe(select(fromStore.selectHomeArtists)),
-					this.store.pipe(select(fromStore.selectHomeTotal)),
-				])),
-				tap((data) => console.log(data)),
-				filter(([data, total]: [Artist[], number]) => !!data && !!total),
-				filter(([data, total]: [Artist[], number]) => total > data.length),
-				switchMap(() => combineLatest([
-					this.store.pipe(select(fromStore.selectHomeOffset)),
-					this.store.pipe(select(fromStore.selectHomeQuery)),
-				])),
-				tap(([offset, query]: [number, string]) => {
-					return of(this.store.dispatch(new fromStore.LoadArtistsAction({ q: query, offset: `${offset + ITEMS_LIMIT}` })));
-				}),
+				switchMap(() => this.store.pipe(select(fromStore.selectHomeLoading))),
+				filter(loading => !loading),
+				switchMap(() => this.store.pipe(select(fromStore.selectArtistsAndTotal))),
+				filter(({ artists, total }) => !!artists && !!total && total > artists.length),
+				switchMap(() => this.store.pipe(select(fromStore.selectQueryAndOffset))),
+				throttleTime(300),
 				takeUntil(this.destroy$)
 			)
-			.subscribe(() => {
-				console.log('test')
+			.subscribe(({ query, offset }) => {
+				this.store.dispatch(new fromStore.LoadArtistsAction({ q: query, offset: `${offset + ITEMS_LIMIT}` }));
 			});
 	}
 }
