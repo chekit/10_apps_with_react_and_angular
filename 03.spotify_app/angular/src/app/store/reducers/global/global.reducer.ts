@@ -1,8 +1,7 @@
-import { GlobalActions, GlobalActionTypes, GetTokeSuccessAction } from '../../actions/global/global.action';
+import { GetTokeFailureAction, GlobalActions, GlobalActionTypes } from '../../actions/global/global.action';
 
 export interface GlobalState {
-    // token: string | null;
-    error: string | null;
+    error: string;
     loading: boolean;
 }
 
@@ -27,7 +26,7 @@ export function globalReducer(state: GlobalState, action: GlobalActions): Global
         case GlobalActionTypes.GET_TOKEN_FAILURE:
             return {
                 ...state,
-                error: (action as GetTokeSuccessAction).payload,
+                error: (action as GetTokeFailureAction).payload,
                 loading: false
             };
         default:

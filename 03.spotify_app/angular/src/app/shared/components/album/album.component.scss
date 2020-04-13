@@ -15,8 +15,16 @@
 }
 
 .album {
+    $this: &;
+    
     color: inherit;
     text-decoration: none;
+
+    &:hover {
+        #{$this}__title {
+            color: #3f51b5;
+        }
+    }
 
     &__title {
         display: flex;
@@ -24,9 +32,10 @@
         font-size: 1.4rem;
         margin: 1em 0;
         font-weight: 400;
+        transition: color .15s ease-in-out;
     }
 
     &__icon {
         margin-right: 10px;
-    }
+   }
 }

@@ -17,6 +17,7 @@
 						Loaded {{ artists.length }} of {{ total$ | async }}
 					</mat-chip>
 				</mat-chip-list>
+				<button class="load-more-btn" (click)="loadMoreData()">Load more</button>
 			</ng-container>
 			<div class="loader" *ngIf="loading$ | async">
 				<sp-loader>

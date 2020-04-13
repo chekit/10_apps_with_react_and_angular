@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { forkJoin, fromEvent, Observable, Subject, combineLatest, of, from } from 'rxjs';
-import { filter, switchMap, takeUntil, exhaustMap, tap, delay, distinctUntilChanged, map, debounceTime, throttleTime } from 'rxjs/operators';
+import { filter, switchMap, takeUntil, exhaustMap, tap, delay, distinctUntilChanged, map, debounceTime, throttleTime, take } from 'rxjs/operators';
 import { ITEMS_LIMIT } from 'src/app/config/constants';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
 import { RouteTitleService } from 'src/app/core/services/title.service';
@@ -41,9 +41,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
 	total$: Observable<number>;
 	artists$: Observable<Artist[]>;
 
-	private itemsPerPage: number = 10;
-	private itemHeight: number = 30;
-
 	private destroy$: Subject<boolean> = new Subject();
 
 	constructor(
@@ -79,6 +76,16 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 	showArtistInfo({ id }: Artist): void {
 		this.router.navigate([`/artist/${id}`]);
+	}
+
+	loadMoreData(): void {
+		this.store.pipe(
+				select(fromStore.selectQueryAndOffset),
+				take(1)
+			)
+			.subscribe(({ query, offset }) => {
+				this.store.dispatch(new fromStore.LoadArtistsAction({ q: query, offset: `${offset + ITEMS_LIMIT}` }));
+			});
 	}
 
 	trackById(index: number, item: Album): string {

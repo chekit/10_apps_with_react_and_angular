@@ -1,6 +1,6 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-import { HomeState, GlobalState } from './reducers';
+import { HomeState, GlobalState, ArtistState } from './reducers';
 import * as fromReducers from './reducers';
 
 export * from './actions';
@@ -11,9 +11,11 @@ export * from './effects';
 export interface AppState {
     home: HomeState;
     global: GlobalState;
+    artist: ArtistState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
     home: fromReducers.homeReducer,
-    global: fromReducers.globalReducer
-}
+    global: fromReducers.globalReducer,
+    artist: fromReducers.artistReducer
+};

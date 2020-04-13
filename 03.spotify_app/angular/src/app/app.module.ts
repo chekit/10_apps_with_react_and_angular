@@ -21,7 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
         PagesModule,
         BrowserAnimationsModule,
         StoreModule.forRoot(fromStore.reducers),
-        EffectsModule.forRoot([fromStore.HomeEffects, fromStore.GlobalEffects]),
+        EffectsModule.forRoot([fromStore.HomeEffects, fromStore.GlobalEffects, fromStore.ArtistDataEffects]),
         StoreDevtoolsModule.instrument({
             name: 'ngSpotify App',
             maxAge: 20,

@@ -3,14 +3,14 @@ import { createSelector } from '@ngrx/store';
 import { AppState } from '../..';
 import { HomeState } from '../../reducers';
 
-export const getHomeState = (state: AppState) => state.home;
+export const getHomeState = ({ home }: AppState) => home;
 
-export const selectHomeQuery = createSelector(getHomeState, (state: HomeState) => state.query);
-export const selectHomeLoading = createSelector(getHomeState, (state: HomeState) => state.loading);
-export const selectHomeArtists = createSelector(getHomeState, (state: HomeState) => state.collection);
-export const selectHomeTotal = createSelector(getHomeState, (state: HomeState) => state.total);
-export const selectHomeOffset = createSelector(getHomeState, (state: HomeState) => state.offset);
-export const selectHomeError = createSelector(getHomeState, (state: HomeState) => state.error);
+export const selectHomeQuery = createSelector(getHomeState, ({ query }: HomeState) => query);
+export const selectHomeLoading = createSelector(getHomeState, ({ loading }: HomeState) => loading);
+export const selectHomeArtists = createSelector(getHomeState, ({ collection }: HomeState) => collection);
+export const selectHomeTotal = createSelector(getHomeState, ({ total }: HomeState) => total);
+export const selectHomeOffset = createSelector(getHomeState, ({ offset }: HomeState) => offset);
+export const selectHomeError = createSelector(getHomeState, ({ error }: HomeState) => error);
 
 export const selectArtistsAndTotal = createSelector(selectHomeTotal, selectHomeArtists, (total, artists) => ({ total, artists }));
 export const selectQueryAndOffset = createSelector(selectHomeOffset, selectHomeQuery, (offset, query) => ({ offset, query }));
