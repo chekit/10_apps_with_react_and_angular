@@ -8,26 +8,52 @@ ___
 ## Simple website
 
 ### Angular version
+
+> Angular, Angular Material
+
 - [code](01.simple_website/angular/src)
 - [result](01.simple_website/angular/dist/)
-- [gh-pages](https://chekit.github.io/10_apps_with_react_and_angular/01.simple_website/angular/docs/)
+- ~~[gh-pages]()~~
 
 ### React version
+
+> React, Material UI, Typescript
+
 - [code](01.simple_website/react_website/src)
 - [result](01.simple_website/react_website/build)
-- [gh-pages](https://chekit.github.io/10_apps_with_react_and_angular/01.simple_website/react_website/docs/)
+- ~~[gh-pages]()~~
 
 ___
 
 ## Github Profile Searcher
 
 ### Angular version
+
+> Angular, Angular Material
+
 - [code](02.github_searcher/angular/src)
 - [result](02.github_searcher/angular/dist/angular)
-- [gh-pages]()
+- ~~[gh-pages]()~~
 
 ### React version
+
+> React, Bootstrap, Typescript
+
 - [code](02.github_searcher/reacct_guthub/src)
 - [result](02.github_searcher/angular/build)
-- [gh-pages]()
+- ~~[gh-pages]()~~
+
+___
+
+## Spotify App
+
+### Angular version
+
+> Angular, Angular Material, NgRx
+
+- [code](02.github_searcher/angular/src)
+- [result](02.github_searcher/angular/dist/angular)
+- ~~[gh-pages]()~~
+
+### React version
 
