@@ -18,7 +18,7 @@ export interface BasicDataItemResponse {
 }
 
 export interface ExternalUrls {
-	spotify: string;
+	[resource: string]: string;
 }
 
 export interface BasicImageDataResponse {

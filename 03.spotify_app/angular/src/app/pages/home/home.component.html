@@ -3,17 +3,23 @@
 		<h1>Need Music?</h1>
 		<p>Just search artist by using the input below</p>
 	</header>
-	<ps-search (queryChange)="onQueryChange($event)" [query]="currentQuery"></ps-search>
-	<ng-container *ngIf="!isError(); else error">
+	<ps-search (queryChange)="onQueryChange($event)" [query]="currentQuery$ | async"></ps-search>
+	<ng-container *ngIf="!(error$ | async); else error">
 		<div class="content">
-			<div class="artists">
-				<ng-container *ngIf="state?.data?.length; else empty">
-					<ng-container *ngFor="let item of state?.data; trackBy: trackById">
-						<sp-artist class="artists__item" [model]="item" (click)="showArtistInfo(item)"></sp-artist>
+			<ng-container *ngIf="artists$ | async as artists; else empty">
+				<div class="artists">
+					<ng-container *ngFor="let artist of artists; trackBy: trackById">
+						<sp-artist class="artists__item" [model]="artist" (click)="showArtistInfo(artist)"></sp-artist>
 					</ng-container>
-				</ng-container>
-			</div>
-			<div class="loader" *ngIf="isLoading()">
+				</div>
+				<mat-chip-list  *ngIf="!(loading$ | async)">
+					<mat-chip color="primary" selected>
+						Loaded {{ artists.length }} of {{ total$ | async }}
+					</mat-chip>
+				</mat-chip-list>
+				<button class="load-more-btn" (click)="loadMoreData()">Load more</button>
+			</ng-container>
+			<div class="loader" *ngIf="loading$ | async">
 				<sp-loader>
 					Loading...
 				</sp-loader>
@@ -23,11 +29,11 @@
 </section>
 
 <ng-template #error>
-	<sp-message [message]="state.data"></sp-message>
+	<sp-message [message]="error$ | async"></sp-message>
 </ng-template>
 
 <ng-template #empty>
-	<div class="empty" *ngIf="state.data">
-		<p>Not found</p>
+	<div class="empty" *ngIf="artists$ | async">
+		<p><strong>{{ currentQuery$ | async }}</strong> not found!</p>
 	</div>
 </ng-template>

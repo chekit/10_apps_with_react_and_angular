@@ -1,25 +1,49 @@
-<ng-container *ngIf="!(isLoading | async); else loading">
-	<ng-container *ngIf="!!model; else nodata">
-		<div class="artist" *ngIf="model.artist">
-			<h1 class="artist__name">{{ model.artist.name }}</h1>
-			<ng-container *ngIf="model.artistImage; else nophoto">
-				<div class="artist__image">
-					<img [src]="model.artistImage" [alt]="model.artist.name" />
+<ng-container *ngIf="!(isLoading$ | async); else loading">
+	<ng-container *ngIf="error$ | async as error">
+		<sp-message [type]="'error'">{{ error }}</sp-message>
+	</ng-container>
+	<ng-container *ngIf="model$ | async as model; else nodata">
+		<ng-container *ngIf="model.artist">
+			<div class="artist">
+				<h1 class="artist__name">{{ model.artist.name }}</h1>
+				<div class="artist__media columns">
+					<div class="column">
+						<ng-container *ngIf="model.artistImage; else nophoto">
+							<div class="artist__image">
+								<img [src]="model.artistImage" [alt]="model.artist.name" />
+							</div>
+						</ng-container>
+					</div>
+					<ng-container *ngIf="externalResources$ | async as externalResources">
+						<div class="column" *ngIf="externalResources.length > 0">
+							<h2 class="column__header"><span
+									class="material-icons external-links__icon">web</span>&nbsp;Extrenal links</h2>
+							<ul class="external-links">
+								<ng-container *ngFor="let resource of externalResources">
+									<li class="external-links__item">
+										<span>{{ resource[0] | titlecase }}</span>:&nbsp;
+										<a class="external-links__link" [attr.href]="resource[1]"
+											[attr.title]="resource[0]" target="_blank">{{ resource[1] }}</a>
+									</li>
+								</ng-container>
+							</ul>
+						</div>
+					</ng-container>
 				</div>
-			</ng-container>
-			<div class="artist_geners">
-				<ul class="genres-list">
-					<li class="genres-list__item" *ngFor="let genre of model.artist.genres">
+				<ul class="genre-list">
+					<li class="genre-list__item" *ngFor="let genre of model.artist.genres">
 						{{ genre }}
 					</li>
 				</ul>
 			</div>
+		</ng-container>
+		<ng-container *ngIf="model.albums">
 			<div class="albums">
 				<ng-container *ngFor="let album of model.albums.albums">
 					<sp-album [model]="album" class="albums__item"></sp-album>
 				</ng-container>
 			</div>
-		</div>
+		</ng-container>
 	</ng-container>
 </ng-container>
 
@@ -28,7 +52,7 @@
 </ng-template>
 
 <ng-template #nodata>
-	<sp-message [type]="'error'">Something went wrong.</sp-message>
+	<sp-message [type]="'error'">No artist data.</sp-message>
 </ng-template>
 
 <ng-template #nophoto>

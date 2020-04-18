@@ -46,8 +46,7 @@ export class AuthService {
 				map((data: TokenData) => {
 					this.currentToken = `${data.token_type} ${data.access_token}`;
 					return this.currentToken;
-				}),
-				catchError(err => EMPTY)
+				})
 			);
 
 	}
