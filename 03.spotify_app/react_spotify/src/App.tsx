@@ -1,26 +1,26 @@
+import Container from '@material-ui/core/Container';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import About from './pages/About';
+import Artist from './pages/Artist';
+import Home from './pages/Home';
+import MainMenu from './components/MainMenu';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <MainMenu />
+            <Container maxWidth="lg">
+                <Switch>
+                    <Route path="/about"><About /></Route>
+                    <Route path="/artist/:id"><Artist /></Route>
+                    <Route path="/"><Home /></Route>
+                </Switch>
+            </Container>
+        </Router>
+    );
 }
 
 export default App;
