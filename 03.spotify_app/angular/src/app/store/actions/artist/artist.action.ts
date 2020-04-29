@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Artist } from 'src/app/shared/models/artists.model';
-import { AlbumsCollection } from 'src/app/shared/models/albums.model';
+import { AlbumsCollection, Artist } from 'src/app/shared/models';
 
 export enum ArtistActionTypes {
     LOAD_ARTIST = '[Artist] Load Artist',

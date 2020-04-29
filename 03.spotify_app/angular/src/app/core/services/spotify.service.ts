@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { API_URL, ITEMS_LIMIT } from 'src/app/config/constants';
 import {
+    AlbumsCollection,
+    AlbumsCollectionResponse,
+    AlbumsSearchResponse,
     Artist,
     ArtistItemResponse,
     ArtistsCollection,
-	ArtistsSearchResponse,
-} from 'src/app/shared/models/artists.model';
-
-import { AlbumsCollection, AlbumsSearchResponse, AlbumsCollectionResponse } from './../../shared/models/albums.model';
+    ArtistsSearchResponse,
+} from 'src/app/shared/models';
 
 export enum SearchTypes {
 	ARTIST = 'artist',

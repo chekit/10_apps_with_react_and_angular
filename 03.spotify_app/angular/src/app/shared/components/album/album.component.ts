@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-
-import { Album } from './../../models/albums.model';
-import { BasicImageData } from '../../models/basic.model';
 import { COVER_SIZE } from 'src/app/config/constants';
+
+import { Album, BasicImageData } from '../../models';
 
 const MAIN_SOURCE: string = 'spotify';
 

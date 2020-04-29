@@ -5,6 +5,8 @@ import { SharedComponentsModule } from './components/shared-component.module';
 	imports: [
 		SharedComponentsModule
 	],
-	exports: []
+	exports: [
+		SharedComponentsModule
+	]
 })
 export class SharedModule { }

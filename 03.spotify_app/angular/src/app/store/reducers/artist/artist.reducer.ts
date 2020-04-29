@@ -1,5 +1,4 @@
-import { AlbumsCollection } from 'src/app/shared/models/albums.model';
-import { Artist } from 'src/app/shared/models/artists.model';
+import { AlbumsCollection, Artist } from 'src/app/shared/models';
 
 import {
     ArtistActions,
@@ -9,6 +8,7 @@ import {
     LoadArtistFailureAction,
     LoadArtistSuccessAction,
 } from '../../actions/artist/artist.action';
+
 
 export interface ArtistState {
     loadingArtistData: boolean;

@@ -3,9 +3,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
-import { ArtistsCollection } from 'src/app/shared/models/artists.model';
+import { ArtistsCollection } from 'src/app/shared/models';
 
-import { HomeActionTypes, LoadArtistsAction, LoadArtistsSuccesAction, LoadArtistsFailureAction } from '../../actions';
+import { HomeActionTypes, LoadArtistsAction, LoadArtistsFailureAction, LoadArtistsSuccesAction } from '../../actions';
 
 @Injectable()
 export class HomeEffects {

@@ -1,14 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { forkJoin, fromEvent, Observable, Subject, combineLatest, of, from } from 'rxjs';
-import { filter, switchMap, takeUntil, exhaustMap, tap, delay, distinctUntilChanged, map, debounceTime, throttleTime, take } from 'rxjs/operators';
+import { fromEvent, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, switchMap, take, takeUntil, throttleTime } from 'rxjs/operators';
 import { ITEMS_LIMIT } from 'src/app/config/constants';
-import { SpotifyService } from 'src/app/core/services/spotify.service';
 import { RouteTitleService } from 'src/app/core/services/title.service';
 import { ArtistComponent } from 'src/app/shared/components/artist/artist.component';
-import { Album } from 'src/app/shared/models/albums.model';
-import { Artist, ArtistsCollection } from 'src/app/shared/models/artists.model';
+import { Album, Artist } from 'src/app/shared/models';
 
 import * as fromStore from './../../store';
 

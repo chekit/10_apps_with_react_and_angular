@@ -3,8 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { SpotifyService } from 'src/app/core/services/spotify.service';
-import { AlbumsCollection } from 'src/app/shared/models/albums.model';
-import { Artist } from 'src/app/shared/models/artists.model';
+import { AlbumsCollection, Artist } from 'src/app/shared/models';
 
 import {
     ArtistActionTypes,

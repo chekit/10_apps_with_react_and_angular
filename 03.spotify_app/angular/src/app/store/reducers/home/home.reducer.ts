@@ -1,4 +1,4 @@
-import { Artist, ArtistsCollection } from 'src/app/shared/models/artists.model';
+import { Artist } from 'src/app/shared/models';
 
 import {
     HomeActions,
@@ -6,8 +6,8 @@ import {
     LoadArtistsFailureAction,
     LoadArtistsSuccesAction,
     SetQueryAction,
-    LoadArtistsAction,
 } from '../../actions';
+
 
 export interface HomeState {
     query: string;
