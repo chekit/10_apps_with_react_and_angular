@@ -23,22 +23,20 @@ const StyledLink = styled(NavLink)`
     }
 `;
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            flexGrow: 1,
-        },
-        menuButton: {
-            marginRight: theme.spacing(2),
-        },
-        title: {
-            flexGrow: 1,
-        },
-    }),
-);
-
 function MainMenu() {
-    let currentLocationName: string = '';
+    const useStyles = makeStyles((theme: Theme) =>
+        createStyles({
+            root: {
+                flexGrow: 1,
+            },
+            menuButton: {
+                marginRight: theme.spacing(2),
+            },
+            title: {
+                flexGrow: 1,
+            },
+        }),
+    );
 
     const classes = useStyles();
 
@@ -48,8 +46,7 @@ function MainMenu() {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = (name: string) => {
-        currentLocationName = name;
+    const handleClose = () => {
         setAnchorEl(null);
     };
 
@@ -66,14 +63,14 @@ function MainMenu() {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={() => handleClose('Home')}>
+                    <MenuItem onClick={() => handleClose()}>
                         <StyledLink to="/" activeClassName="selected">Home</StyledLink>
                     </MenuItem>
-                    <MenuItem onClick={() => handleClose('About')}>
+                    <MenuItem onClick={() => handleClose()}>
                         <StyledLink to="/about" activeClassName="selected">About</StyledLink>
                     </MenuItem>
                 </Menu>
-                <Typography variant="h6" className={classes.title}>{ currentLocationName }</Typography>
+                <Typography variant="h6" className={classes.title}>React Spotify App</Typography>
             </Toolbar>
         </AppBar>
     );
