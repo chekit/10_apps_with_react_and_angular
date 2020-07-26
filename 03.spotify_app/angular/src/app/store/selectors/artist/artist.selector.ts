@@ -1,10 +1,8 @@
 import { createSelector } from '@ngrx/store';
+import { AlbumsCollection, Artist, ArtistPageModel } from 'src/app/shared/models';
 
 import { AppState } from '../..';
 import { ArtistState } from '../../reducers';
-import { Artist } from 'src/app/shared/models/artists.model';
-import { AlbumsCollection } from 'src/app/shared/models/albums.model';
-import { ArtistPageModel } from 'src/app/shared/models/artist-page.model';
 
 export const getArtistState = (state: AppState) => state.artist;
 

@@ -38,7 +38,7 @@ ___
 
 > React, Bootstrap, Typescript
 
-- [code](02.github_searcher/reacct_guthub/src)
+- [code](02.github_searcher/react_guthub/src)
 - [result](02.github_searcher/angular/build)
 - ~~[gh-pages]()~~
 
@@ -50,9 +50,13 @@ ___
 
 > Angular, Angular Material, NgRx
 
-- [code](02.github_searcher/angular/src)
-- [result](02.github_searcher/angular/dist/angular)
+- [code](03.spotify_app/angular/src)
+- [result](03.spotify_app/angular/dist/angular)
 - ~~[gh-pages]()~~
 
 ### React version
 
+> React, TyoeScript, Material UI, Styled Components
+
+- [code](03.spotify_app/react_spotify/src)
+- ~~[gh-pages]()~~

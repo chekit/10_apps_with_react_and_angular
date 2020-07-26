@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { SearchConfig } from 'src/app/core/services/spotify.service';
-import { Artist, ArtistsCollection } from 'src/app/shared/models/artists.model';
+import { ArtistsCollection } from 'src/app/shared/models';
 
 export enum HomeActionTypes {
     SET_QUERY = '[Home] Set user query',

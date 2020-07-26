@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Artist } from '../../models/artists.model';
-import { BasicImageData } from '../../models/basic.model';
 import { COVER_SIZE } from 'src/app/config/constants';
+
+import { Artist, BasicImageData } from '../../models';
 
 @Component({
 	selector: 'sp-artist',

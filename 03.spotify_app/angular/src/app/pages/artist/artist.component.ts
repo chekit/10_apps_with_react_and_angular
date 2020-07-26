@@ -3,9 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Artist } from 'src/app/shared/models/artists.model';
+import { Artist, ArtistPageModel } from 'src/app/shared/models';
 
-import { ArtistPageModel } from './../../shared/models/artist-page.model';
 import * as fromStore from './../../store';
 
 @Component({
