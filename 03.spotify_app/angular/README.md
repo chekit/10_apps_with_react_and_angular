@@ -1,3 +1,3 @@
 # Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+Angular version of the app to work with Spotify API
