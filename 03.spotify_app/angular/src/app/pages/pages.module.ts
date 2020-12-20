@@ -10,7 +10,7 @@ import { PagesWrapperComponent } from './wrapper/pages-wrapper.component';
 
 @NgModule({
 	imports: [
-		RouterModule.forRoot(appRoutes),
+		RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
 		SharedModule
 	],
 	declarations: [
