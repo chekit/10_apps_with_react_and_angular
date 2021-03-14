@@ -1,0 +1,12 @@
+<main class="container" [loading]="(isLoading$! | async)!">
+    <section class="section">
+        <add-todo-form (addTodo)="onAddTodo($event)"></add-todo-form>
+    </section>
+    <section class="section">
+        <ng-container *ngIf="todos$ | async as todos">
+            <ng-container *ngFor="let todo of todos">
+                <todo [data]="todo" (completed)="onCompleted($event, todo)" (delete)="onDelete(todo)" (editText)="onEditText($event, todo)"></todo>
+            </ng-container>
+        </ng-container>
+    </section>
+</main>

@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const json = require('body-parser/lib/types/json');
 const urlencoded = require('body-parser/lib/types/urlencoded');
+const cors = require('cors')
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
+
+app.use(cors());
 
 // controllers
 app.use('/', index);

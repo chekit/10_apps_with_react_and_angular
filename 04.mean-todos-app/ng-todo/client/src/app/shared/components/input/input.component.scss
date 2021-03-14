@@ -1,0 +1,18 @@
+:host {
+    .control {
+        position: relative;
+
+        .delete {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 5px;
+            margin: auto;
+        }
+
+        .input {
+            min-width: 250px;
+            padding-right: 30px;
+        }
+    }
+}

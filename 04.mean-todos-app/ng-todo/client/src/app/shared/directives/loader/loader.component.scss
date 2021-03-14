@@ -1,0 +1,20 @@
+:host {
+    .loading {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.45);
+
+        .loader {
+            border-color: #3273dc;
+            border-right-color: transparent;
+            border-top-color: transparent;
+        }
+    }
+}

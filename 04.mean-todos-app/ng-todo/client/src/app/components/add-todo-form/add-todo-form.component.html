@@ -1,0 +1,8 @@
+<h1 class="title">Add ToDo</h1>
+<div class="field is-grouped">
+    <app-input #input></app-input>
+    &nbsp;
+    <div class="control">
+        <button class="button is-link is-medium" (click)="submit(input.todoCtrl.value?.trim())" [disabled]="!input.todoCtrl.value?.trim()">Submit</button>
+    </div>
+</div>

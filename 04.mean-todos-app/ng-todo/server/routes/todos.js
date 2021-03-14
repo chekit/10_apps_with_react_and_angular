@@ -60,7 +60,7 @@ router.put('/todos/:id', (req, res, next) => {
             "error": "Invalid Data",
         });
     } else {
-        db.todos.update({ _id: mongojs.ObjectId(req.params.id) }, upd, (err, result) => {
+        db.todos.update({ _id: mongojs.ObjectId(req.params.id) }, { $set: upd }, (err, result) => {
             err
                 ? res.send(err)
                 : res.json(result);
