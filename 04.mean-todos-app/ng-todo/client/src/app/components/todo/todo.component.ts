@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Todo } from 'src/app/shared/models';
 
 @Component({
-    selector: 'todo',
+    selector: 'app-todo',
     templateUrl: './todo.component.html',
     styleUrls: ['./todo.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,10 +13,10 @@ export class TodoComponent implements OnInit {
     @Input()
     set data(value: Todo) {
         this.isCompletedCtrl.setValue(value.isCompleted);
-        this._data = value;
+        this.todo = value;
     }
-    get data() {
-        return this._data;
+    get data(): Todo {
+        return this.todo;
     }
 
     @Output() completed: EventEmitter<boolean> = new EventEmitter();
@@ -27,12 +27,12 @@ export class TodoComponent implements OnInit {
     isCompletedCtrl: FormControl;
     isEdit = false;
 
-    private _data!: Todo;
+    private todo!: Todo;
 
     constructor(
         private fb: FormBuilder
     ) {
-        this.isCompletedCtrl = this.fb.control(false)
+        this.isCompletedCtrl = this.fb.control(false);
     }
 
     ngOnInit(): void {
@@ -51,9 +51,5 @@ export class TodoComponent implements OnInit {
     saveEdit(value: string): void {
         this.editText.emit(value);
         this.toggleEdit();
-    }
-
-    onInputChange(value: string): void {
-
     }
 }

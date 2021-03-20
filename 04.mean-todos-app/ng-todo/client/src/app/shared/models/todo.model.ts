@@ -5,21 +5,21 @@ export interface TodoDTO {
 }
 
 export class Todo {
-    static toDTO(data: Todo): TodoDTO {
-        return {
-            _id: data.id!,
-            text: data.text,
-            isCompleted: data.isCompleted
-        }
-    }
-
-    text: string;
-    isCompleted: boolean;
-    id: string | null;
 
     constructor(data: TodoDTO) {
         this.text = data.text;
         this.isCompleted = data.isCompleted;
-        this.id = data._id ?? null;
+        this.id = data._id ?? '';
+    }
+
+    text: string;
+    isCompleted: boolean;
+    id: string;
+    static toDTO(data: Todo): TodoDTO {
+        return {
+            _id: data.id,
+            text: data.text,
+            isCompleted: data.isCompleted
+        };
     }
 }

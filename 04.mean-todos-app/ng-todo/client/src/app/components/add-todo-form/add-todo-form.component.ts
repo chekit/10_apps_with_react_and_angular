@@ -3,13 +3,13 @@ import { InputComponent } from 'src/app/shared/components/input/input.component'
 import { TodoDTO } from 'src/app/shared/models';
 
 @Component({
-    selector: 'add-todo-form',
+    selector: 'app-add-todo-form',
     templateUrl: './add-todo-form.component.html',
     styleUrls: ['./add-todo-form.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddTodoFormComponent {
-    text: string = '';
+    text = '';
 
     @Output() addTodo = new EventEmitter<TodoDTO>();
 

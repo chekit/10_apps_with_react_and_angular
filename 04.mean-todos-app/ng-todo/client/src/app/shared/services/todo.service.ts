@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Todo, TodoDTO } from './shared/models';
+import { Todo, TodoDTO } from '../models';
 
-const base = `http://localhost:3000/api/v1`
+const base = `http://localhost:3000/api/v1`;
 
 @Injectable({
     providedIn: 'root'
 })
-export class AppTodoService {
+export class TodoService {
     constructor(
         private http: HttpClient
     ) { }

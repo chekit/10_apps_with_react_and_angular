@@ -11,10 +11,10 @@ export class InputComponent implements OnInit {
     todoCtrl: FormControl;
 
     @Input() set value(str: string) {
-        this.todoCtrl.setValue(str, { emitEvent: false })
+        this.todoCtrl.setValue(str, { emitEvent: false });
     }
 
-    @Output() change: EventEmitter<string> = new EventEmitter();
+    @Output() inputChange: EventEmitter<string> = new EventEmitter();
 
     constructor(
         private fb: FormBuilder
@@ -29,12 +29,15 @@ export class InputComponent implements OnInit {
                 debounceTime(300)
             )
             .subscribe(value => {
-                this.change.emit(value);
+                this.inputChange.emit(value);
             });
     }
 
-    clear(input?: HTMLInputElement): void {
+    clear(inputRef?: HTMLInputElement): void {
         this.todoCtrl.reset();
-        input && input.focus();
+
+        if (inputRef) {
+            inputRef.focus();
+        }
     }
 }

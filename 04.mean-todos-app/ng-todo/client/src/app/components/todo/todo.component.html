@@ -1,19 +1,19 @@
 <div class="box" [loading]="(isLoading$! | async)!">
     <ng-container *ngIf="!isEdit; else editTodo">
         <label class="checkbox" [class.is-storked]="data.isCompleted">
-            <input type="checkbox" [formControl]="isCompletedCtrl" />
+            <input type="checkbox" [formControl]="isCompletedCtrl" data-test-complete-todo-checkbox />
             {{ data.text }}
         </label>
-        <div class="buttons are-small">
-            <button class="button is-light" (click)="toggleEdit()">Edit</button>
-            <button class="button is-light" (click)="onDelete()">Delete</button>
+        <div class="buttons are-small" data-test-manage-todo-buttons>
+            <button class="button is-light" (click)="toggleEdit()" data-test-edit-todo-button>Edit</button>
+            <button class="button is-light" (click)="onDelete()" data-test-delete-todo-button>Delete</button>
         </div>
     </ng-container>
 </div>
 <ng-template #editTodo>
     <app-input [value]="data.text" #input></app-input>
-    <div class="buttons are-small">
-        <button class="button is-light" (click)="saveEdit(input.todoCtrl.value)" [disabled]="!input.todoCtrl.value?.trim()">Save</button>
-        <button class="button is-light" (click)="toggleEdit()">Cancel</button>
+    <div class="buttons are-small" data-test-manage-todo-edit-buttons>
+        <button class="button is-light" (click)="saveEdit(input.todoCtrl.value)" [disabled]="!input.todoCtrl.value?.trim()" data-test-save-todo-button>Save</button>
+        <button class="button is-light" (click)="toggleEdit()" data-test-cancel-todo-button>Cancel</button>
     </div>
 </ng-template>

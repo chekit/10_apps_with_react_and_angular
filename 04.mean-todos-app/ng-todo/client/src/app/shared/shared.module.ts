@@ -21,6 +21,4 @@ import { LoaderComponent, LoaderDirective } from './directives';
         CommonModule
     ]
 })
-export class SharedModule {
-
-}
+export class SharedModule { }
